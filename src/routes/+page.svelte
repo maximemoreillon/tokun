@@ -13,18 +13,22 @@
   }
 </script>
 
-<div>
-  <textarea bind:value={input} />
-  <button on:click={() => handleClick()}>Tokenize</button>
+<textarea bind:value={input} class="w-full border-1 p-2 rounded-sm" />
+
+<div class="text-center my-2">
+  <button on:click={() => handleClick()} class="border-1 rounded-sm px-2 py-1"
+    >Tokenize</button
+  >
 </div>
 
 <div>
   {#if tokens}
     {#each tokens as token}
-      {#if token.surface_form === "\n"}
+      {#if token.surface_form.includes("\n")}
         <br />
       {:else if token.pos === "名詞"}
-        <ruby class="token">{token.surface_form}<rt>{token.reading}</rt></ruby>
+        <span class="border-b-1">{token.surface_form}</span>
+        <!-- <ruby class="">{token.surface_form}<rt>{token.reading}</rt></ruby> -->
       {:else}
         <span>{token.surface_form}</span>
       {/if}
@@ -33,14 +37,4 @@
 </div>
 
 <style>
-  .token {
-    transition: font-size 0.3s;
-    margin-inline: 1px;
-    cursor: pointer;
-    border-bottom: 1px solid green;
-  }
-
-  .token:hover {
-    font-size: 200%;
-  }
 </style>
