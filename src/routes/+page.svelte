@@ -1,8 +1,8 @@
 <script lang="ts">
-  let input: string = `お世話になります。
-  山田と申します`;
+  import Noun from "$lib/noun.svelte";
+  let input: string = `お世話になります。\n山田と申します`;
 
-  let tokens: any[] | null = null;
+  let tokens: Token[] | null = null;
 
   async function handleClick() {
     const response = await fetch("/api/tokenize", {
@@ -16,9 +16,9 @@
 <textarea bind:value={input} class="w-full border-1 p-2 rounded-sm" />
 
 <div class="text-center my-2">
-  <button on:click={() => handleClick()} class="border-1 rounded-sm px-2 py-1"
-    >Tokenize</button
-  >
+  <button on:click={() => handleClick()} class="border-1 rounded-sm px-2 py-1">
+    Tokenize
+  </button>
 </div>
 
 <div>
@@ -27,8 +27,7 @@
       {#if token.surface_form.includes("\n")}
         <br />
       {:else if token.pos === "名詞"}
-        <span class="border-b-1">{token.surface_form}</span>
-        <!-- <ruby class="">{token.surface_form}<rt>{token.reading}</rt></ruby> -->
+        <Noun {token} />
       {:else}
         <span>{token.surface_form}</span>
       {/if}
