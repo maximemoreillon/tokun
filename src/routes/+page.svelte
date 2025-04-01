@@ -1,5 +1,10 @@
 <h1>Tokun</h1>
 
-<div>
-  <a href="/texts">Texts</a>
-</div>
+<ul>
+  <li>
+    <a href="/texts">Texts</a>
+  </li>
+  <li>
+    <a href="/tokens">Tokens</a>
+  </li>
+</ul>

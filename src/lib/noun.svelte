@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ScoreButtons from "./scoreButtons.svelte";
   import type { tokensTable } from "./server/db/schema";
 
   let dialog: HTMLDialogElement;
@@ -22,14 +23,23 @@
   >
     X
   </button>
-  <div class="my-4 text-2xl text-center">
-    <ruby>
+  <div class="text-center">
+    <ruby class="my-4 text-2xl">
       {token.surface_form}
       <rt>{token.reading}</rt>
     </ruby>
+
+    <ScoreButtons {token} />
+
+    <div>
+      <a href={`/tokens/${token.id}`}>Details</a>
+    </div>
   </div>
 </dialog>
 
-<button class="cursor-pointer" on:click={() => dialog.showModal()}>
+<button
+  class={`cursor-pointer ${token.score <= 0 && "text-red-700"}`}
+  on:click={() => dialog.showModal()}
+>
   {token.surface_form}
 </button>

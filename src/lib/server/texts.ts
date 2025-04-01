@@ -1,6 +1,7 @@
 import { eq } from "drizzle-orm";
 import { textsTable, textTokensTable, tokensTable } from "./db/schema";
 import { db } from "./db";
+import { tokenizePromiseFactory } from "$lib/tokenizer";
 
 export async function registerText(content: string) {
   const [registeredText] = await db
@@ -50,6 +51,11 @@ export async function getTexts() {
 }
 
 export async function getTextAndTokens(textId: number) {
+  const [text] = await db
+    .select()
+    .from(textsTable)
+    .where(eq(textsTable.id, textId));
+
   const result = await db
     .select()
     .from(textTokensTable)
@@ -57,5 +63,5 @@ export async function getTextAndTokens(textId: number) {
     .innerJoin(tokensTable, eq(textTokensTable.token_id, tokensTable.id))
     .orderBy(textTokensTable.position);
 
-  return { tokens: result.map(({ tokens }) => tokens) };
+  return { text, tokens: result.map(({ tokens }) => tokens) };
 }

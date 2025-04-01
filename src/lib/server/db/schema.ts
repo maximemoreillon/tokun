@@ -13,6 +13,7 @@ export const tokensTable = pgTable("tokens", {
   reading: text(),
   // Custom additions
   meaning: text(),
+  score: integer().default(0).notNull(),
 });
 
 export const textTokensTable = pgTable("text_tokens", {

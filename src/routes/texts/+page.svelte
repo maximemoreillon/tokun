@@ -4,6 +4,8 @@
   let { data }: PageProps = $props();
 </script>
 
+<a href="/">← Home</a>
+
 <h2 class="text-2xl">Texts</h2>
 
 <a href="/texts/new">Register new text</a>
