@@ -27,6 +27,7 @@
   "dependencies": {
     "@libsql/client": "^0.14.0",
     "drizzle-orm": "^0.40.0",
-    "kuromoji": "^0.1.2"
+    "kuromoji": "^0.1.2",
+    "postgres": "^3.4.5"
   }
 }

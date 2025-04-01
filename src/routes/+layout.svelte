@@ -4,8 +4,8 @@
   let { children } = $props();
 </script>
 
-<header class="text-3xl p-1 border-b-1 mb-1">
-  <h1>Tokun</h1>
+<header class="p-2 border-b-1 mb-1">
+  <h1 class="text-3xl">Tokun</h1>
 </header>
 <main class="max-w-2xl mx-auto">
   {@render children()}

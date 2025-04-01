@@ -1,6 +1,8 @@
 <script lang="ts">
+  import type { tokensTable } from "./server/db/schema";
+
   let dialog: HTMLDialogElement;
-  export let token: Token;
+  export let token: typeof tokensTable.$inferSelect;
 </script>
 
 <dialog
@@ -8,14 +10,14 @@
   class="backdrop:bg-black/50 backdrop:backdrop-blur-md mx-auto my-8 p-4 max-w-xl w-full relative rounded-sm"
 >
   <button
-    class="absolute top-1 right-1"
+    class="absolute top-2 right-2 p-2 cursor-pointer"
     on:click={() => {
       dialog.close();
     }}
   >
     X
   </button>
-  <div class="my-4">
+  <div class="my-4 text-2xl text-center">
     <ruby>
       {token.surface_form}
       <rt>{token.reading}</rt>
@@ -23,7 +25,7 @@
   </div>
 </dialog>
 
-<button class="border-b-1" on:click={() => dialog.showModal()}>
+<button class="cursor-pointer" on:click={() => dialog.showModal()}>
   {token.surface_form}
 </button>
 
