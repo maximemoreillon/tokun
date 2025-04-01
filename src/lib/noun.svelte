@@ -25,7 +25,7 @@
   </div>
 </dialog>
 
-<button class="cursor-pointer" on:click={() => dialog.showModal()}>
+<button class="cursor-pointer border-b-1" on:click={() => dialog.showModal()}>
   {token.surface_form}
 </button>
 

@@ -10,6 +10,8 @@
 
 <div>
   {#each data.items as text}
-    <a href={`/texts/${text.id}`}>{text.content}</a>
+    <div>
+      <a href={`/texts/${text.id}`}>{text.content.slice(0, 20)}</a>
+    </div>
   {/each}
 </div>

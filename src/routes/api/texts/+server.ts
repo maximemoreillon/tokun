@@ -26,7 +26,8 @@ export async function POST(event) {
       .from(tokensTable)
       .where(eq(tokensTable.surface_form, token.surface_form));
 
-    token_id = foundToken.id;
+    token_id = foundToken?.id;
+
     if (!token_id) {
       const [createdToken] = await db
         .insert(tokensTable)

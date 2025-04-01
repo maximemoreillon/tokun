@@ -10,7 +10,7 @@
 {#each data.tokens as token}
   {#if token.surface_form.includes("\n")}
     <br />
-  {:else if ["名詞", "動詞"].includes(token.pos)}
+  {:else if ["名詞", "動詞", "感動詞"].includes(token.pos)}
     <Noun {token} />
   {:else}
     <span>{token.surface_form}</span>
