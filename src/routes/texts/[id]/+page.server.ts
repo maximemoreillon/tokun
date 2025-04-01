@@ -3,16 +3,11 @@ import { tokensTable } from "$lib/server/db/schema";
 import { textTokensTable } from "$lib/server/db/schema";
 import { eq } from "drizzle-orm";
 import type { PageServerLoad } from "./$types";
+import { getTextAndTokens } from "$lib/server/texts.js";
 
 export const load: PageServerLoad = async ({ params }) => {
-  const result = await db
-    .select()
-    .from(textTokensTable)
-    .where(eq(textTokensTable.text_id, Number(params.id)))
-    .innerJoin(tokensTable, eq(textTokensTable.token_id, tokensTable.id))
-    .orderBy(textTokensTable.position);
+  const id = Number(params.id);
+  const result = await getTextAndTokens(id);
 
-  // const tokens = await tokenizePromiseFactory(body.text);
-
-  return { tokens: result.map(({ tokens }) => tokens) };
+  return result;
 };
