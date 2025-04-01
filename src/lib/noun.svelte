@@ -3,10 +3,15 @@
 
   let dialog: HTMLDialogElement;
   export let token: typeof tokensTable.$inferSelect;
+
+  function handleBackdropClick(event: Event) {
+    if (event.target === dialog) dialog.close();
+  }
 </script>
 
 <dialog
   bind:this={dialog}
+  on:click={handleBackdropClick}
   class="backdrop:bg-black/50 backdrop:backdrop-blur-md mx-auto my-8 p-4 max-w-xl w-full relative rounded-sm"
 >
   <button
@@ -25,9 +30,6 @@
   </div>
 </dialog>
 
-<button class="cursor-pointer border-b-1" on:click={() => dialog.showModal()}>
+<button class="cursor-pointer" on:click={() => dialog.showModal()}>
   {token.surface_form}
 </button>
-
-<style>
-</style>

@@ -1,8 +1,9 @@
-import { pgTable, serial, text, integer } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, integer, timestamp } from "drizzle-orm/pg-core";
 
 export const textsTable = pgTable("texts", {
   id: serial().primaryKey(),
   content: text().notNull().unique(),
+  timestamp: timestamp().notNull().defaultNow(),
 });
 
 export const tokensTable = pgTable("tokens", {
@@ -10,6 +11,8 @@ export const tokensTable = pgTable("tokens", {
   surface_form: text().notNull().unique(),
   pos: text().notNull(),
   reading: text(),
+  // Custom additions
+  meaning: text(),
 });
 
 export const textTokensTable = pgTable("text_tokens", {
