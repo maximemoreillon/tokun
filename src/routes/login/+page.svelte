@@ -3,7 +3,7 @@
   import { page } from "$app/state";
 </script>
 
-<h1>SvelteKit Auth Example</h1>
+<h2 class="text-2xl">Auth</h2>
 <div>
   {#if page.data.session}
     {#if page.data.session.user?.image}
