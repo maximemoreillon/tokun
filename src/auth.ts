@@ -7,4 +7,5 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
     Auth0,
     // GitHub,
   ],
+  trustHost: true,
 });
