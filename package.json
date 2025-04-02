@@ -27,6 +27,7 @@
   "dependencies": {
     "@auth/sveltekit": "^1.8.0",
     "@libsql/client": "^0.14.0",
+    "@sveltejs/adapter-node": "^5.2.12",
     "drizzle-orm": "^0.40.0",
     "kuromoji": "^0.1.2",
     "postgres": "^3.4.5"
