@@ -47,7 +47,20 @@ export async function registerText(content: string) {
 
 export async function readTexts() {
   // TODO: pagination
-  const texts = await db.select().from(textsTable);
+
+  // Using query to easily get the tokens of each text
+  const texts = await db.query.textsTable.findMany({
+    with: {
+      textTokens: {
+        with: {
+          token: {},
+        },
+      },
+    },
+    limit: 10,
+    offset: 0,
+  });
+
   return { items: texts };
 }
 

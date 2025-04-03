@@ -12,25 +12,17 @@
   <thead>
     <tr>
       <th>surface_form</th>
-      <th>score</th>
-      <th>pos</th>
-      <th>See</th>
+      <th>known</th>
     </tr>
   </thead>
   <tbody>
     {#each data.items as token}
       <tr>
-        <td>
-          {token.surface_form}
+        <td class="text-center">
+          <a href={`/tokens/${token.id}`}>{token.surface_form}</a>
         </td>
-        <td>
-          {token.score}
-        </td>
-        <td>
-          {token.pos}
-        </td>
-        <td>
-          <a href={`/tokens/${token.id}`}>See</a>
+        <td class="text-center">
+          {token.known && "✅"}
         </td>
       </tr>
     {/each}

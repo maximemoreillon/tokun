@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import {
   pgTable,
   serial,
@@ -34,3 +35,23 @@ export const textTokensTable = pgTable("text_tokens", {
     .references(() => tokensTable.id, { onDelete: "cascade" }),
   position: integer().notNull(),
 });
+
+// Relations (Only needed for db.query)
+export const textsRelations = relations(textsTable, ({ many }) => ({
+  textTokens: many(textTokensTable),
+}));
+
+export const tokensRelations = relations(tokensTable, ({ many }) => ({
+  textTokens: many(textTokensTable),
+}));
+
+export const textsTokenRelations = relations(textTokensTable, ({ one }) => ({
+  token: one(tokensTable, {
+    fields: [textTokensTable.token_id],
+    references: [tokensTable.id],
+  }),
+  text: one(textsTable, {
+    fields: [textTokensTable.text_id],
+    references: [textsTable.id],
+  }),
+}));
