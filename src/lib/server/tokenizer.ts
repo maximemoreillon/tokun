@@ -6,8 +6,7 @@ export const tokenizePromiseFactory = (expression: string) =>
       .builder({ dicPath: "./node_modules/kuromoji/dict/" })
       .build(function (err, tokenizer) {
         if (err) return reject(err);
-        // tokenizer is ready
-        var path = tokenizer.tokenize(expression);
+        const path = tokenizer.tokenize(expression);
         resolve(path);
       });
   });

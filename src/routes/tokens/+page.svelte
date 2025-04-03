@@ -8,11 +8,13 @@
 
 <h2>Tokens</h2>
 
-<table>
+<table class="w-full">
   <thead>
     <tr>
-      <th> </th>
-      <th> See </th>
+      <th>surface_form</th>
+      <th>score</th>
+      <th>pos</th>
+      <th>See</th>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +22,12 @@
       <tr>
         <td>
           {token.surface_form}
+        </td>
+        <td>
+          {token.score}
+        </td>
+        <td>
+          {token.pos}
         </td>
         <td>
           <a href={`/tokens/${token.id}`}>See</a>

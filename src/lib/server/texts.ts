@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { textsTable, textTokensTable, tokensTable } from "./db/schema";
 import { db } from "./db";
-import { tokenizePromiseFactory } from "$lib/tokenizer";
+import { tokenizePromiseFactory } from "$lib/server/tokenizer";
 
 export async function registerText(content: string) {
   const [registeredText] = await db
@@ -45,9 +45,10 @@ export async function registerText(content: string) {
   return registeredText;
 }
 
-export async function getTexts() {
+export async function readTexts() {
+  // TODO: pagination
   const texts = await db.select().from(textsTable);
-  return texts;
+  return { items: texts };
 }
 
 export async function getTextAndTokens(textId: number) {

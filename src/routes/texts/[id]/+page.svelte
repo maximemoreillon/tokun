@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { PageProps } from "./$types";
   import Noun from "$lib/noun.svelte";
+  import { validPosList } from "$lib/config";
   let { data }: PageProps = $props();
 </script>
 
@@ -10,7 +11,7 @@
 {#each data.tokens as token}
   {#if token.surface_form.includes("\n")}
     <br />
-  {:else if ["名詞", "動詞", "感動詞", "副詞"].includes(token.pos)}
+  {:else if validPosList.includes(token.pos)}
     <Noun {token} />
   {:else}
     <span>{token.surface_form}</span>

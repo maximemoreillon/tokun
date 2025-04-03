@@ -1,9 +1,14 @@
-import { eq } from "drizzle-orm";
+import { eq, inArray, not } from "drizzle-orm";
 import { db } from "./db";
 import { tokensTable } from "./db/schema";
+import { validPosList } from "$lib/config";
 
 export async function readTokens() {
-  const tokens = await db.select().from(tokensTable);
+  // TODO: pagination
+  const tokens = await db
+    .select()
+    .from(tokensTable)
+    .where(inArray(tokensTable.pos, validPosList));
 
   return { items: tokens };
 }
