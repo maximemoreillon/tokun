@@ -38,7 +38,7 @@
 {#each tokens as token, index}
   {#if token.surface_form.includes("\n")}
     <br />
-  {:else if validPosList.includes(token.pos)}
+  {:else if validPosList.includes(token.pos) && token.reading}
     <Noun token={tokens[index]} {onUpdate} />
   {:else}
     <span>{token.surface_form}</span>

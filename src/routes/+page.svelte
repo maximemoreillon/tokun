@@ -1,10 +1,6 @@
-<h1>Tokun</h1>
-
-<ul>
-  <li>
-    <a href="/texts">Texts</a>
-  </li>
-  <li>
-    <a href="/tokens">Tokens</a>
-  </li>
-</ul>
+<div class="flex gap-2 mt-8">
+  <a href="/texts" class="block p-2 border-1 rounded grow text-center">Texts</a>
+  <a href="/tokens" class="block p-2 border-1 rounded grow text-center"
+    >Tokens</a
+  >
+</div>

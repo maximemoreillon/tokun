@@ -1,4 +1,4 @@
-import { eq, inArray, not } from "drizzle-orm";
+import { and, eq, inArray, isNotNull, not } from "drizzle-orm";
 import { db } from "./db";
 import { tokensTable } from "./db/schema";
 import { validPosList } from "$lib/config";
@@ -8,7 +8,12 @@ export async function readTokens() {
   const tokens = await db
     .select()
     .from(tokensTable)
-    .where(inArray(tokensTable.pos, validPosList))
+    .where(
+      and(
+        inArray(tokensTable.pos, validPosList),
+        isNotNull(tokensTable.reading)
+      )
+    )
     .limit(100)
     .offset(0);
 
