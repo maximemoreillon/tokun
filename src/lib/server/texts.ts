@@ -66,3 +66,7 @@ export async function getTextAndTokens(textId: number) {
 
   return { text, tokens: result.map(({ tokens }) => tokens) };
 }
+
+export async function deleteText(id: number) {
+  await db.delete(textsTable).where(eq(textsTable.id, id));
+}
