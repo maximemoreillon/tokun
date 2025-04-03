@@ -10,7 +10,7 @@
 
 <a href="/texts/new">Register new text</a>
 
-<table class="w-full">
+<!-- <table class="w-full">
   <thead>
     <tr>
       <th> Timestamp </th>
@@ -24,7 +24,6 @@
         <td>
           {new Date(text.timestamp).toLocaleDateString()}
         </td>
-        <!-- TODO: ellipsis -->
         <td>
           {text.content.slice(0, 20)}
         </td>
@@ -34,4 +33,22 @@
       </tr>
     {/each}
   </tbody>
-</table>
+</table> -->
+
+{#each data.items as text}
+  <a
+    href={`/texts/${text.id}`}
+    class="block border-1 rounded p-2 w-full my-2"
+    aria-label="text"
+  >
+    <div>
+      {new Date(text.timestamp).toLocaleDateString()}
+    </div>
+
+    <div
+      class="mt-2 w-full overflow-hidden overflow-ellipsis whitespace-nowrap"
+    >
+      {text.content}
+    </div>
+  </a>
+{/each}

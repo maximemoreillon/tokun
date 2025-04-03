@@ -8,7 +8,9 @@ export async function readTokens() {
   const tokens = await db
     .select()
     .from(tokensTable)
-    .where(inArray(tokensTable.pos, validPosList));
+    .where(inArray(tokensTable.pos, validPosList))
+    .limit(100)
+    .offset(0);
 
   return { items: tokens };
 }

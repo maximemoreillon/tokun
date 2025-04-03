@@ -46,6 +46,7 @@
 <span
   class={`cursor-pointer ${token.score <= 0 && "text-red-700"}`}
   onclick={() => dialog.showModal()}
+  onkeydown={() => {}}
 >
   {token.surface_form}
 </span>

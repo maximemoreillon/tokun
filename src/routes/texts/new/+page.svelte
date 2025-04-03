@@ -31,7 +31,5 @@
   </button>
 </div>
 
-<textarea
-  bind:value={content}
-  class="w-full border-1 p-2 rounded-sm min-h-100"
-/>
+<textarea bind:value={content} class="w-full border-1 p-2 rounded-sm min-h-100"
+></textarea>
