@@ -1,9 +1,16 @@
 <script lang="ts">
   import type { tokensTable } from "./server/db/schema";
 
-  export let token: typeof tokensTable.$inferSelect;
+  let { onUpdate, token } = $props<{
+    token: typeof tokensTable.$inferSelect;
+    onUpdate: {
+      (updatedToken: typeof tokensTable.$inferSelect): void;
+    };
+  }>();
 
-  let loading = false;
+  // export let token: typeof tokensTable.$inferSelect;
+
+  let loading = $state(false);
 
   async function setScore(score: number) {
     loading = true;
@@ -11,7 +18,9 @@
       method: "PUT",
       body: JSON.stringify({ score }),
     });
-    await response.json();
+    const updatedToken = await response.json();
+    // token = updatedToken; // Does not work
+    onUpdate(updatedToken);
     loading = false;
   }
 </script>

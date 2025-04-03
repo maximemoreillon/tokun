@@ -10,7 +10,7 @@
 
 <a href="/texts/new">Register new text</a>
 
-<table>
+<table class="w-full">
   <thead>
     <tr>
       <th> Timestamp </th>
@@ -24,6 +24,7 @@
         <td>
           {new Date(text.timestamp).toLocaleDateString()}
         </td>
+        <!-- TODO: ellipsis -->
         <td>
           {text.content.slice(0, 20)}
         </td>

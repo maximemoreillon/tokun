@@ -1,17 +1,8 @@
 <script lang="ts">
   import ScoreButtons from "$lib/scoreButtons.svelte";
   import type { PageProps } from "./$types";
-  import { page } from "$app/state";
 
   let { data: token }: PageProps = $props();
-
-  async function setScore(score: number) {
-    const response = await fetch(`/api/tokens/${page.params.id}`, {
-      method: "PUT",
-      body: JSON.stringify({ score }),
-    });
-    await response.json();
-  }
 </script>
 
 <a href="/tokens">← Return to tokens</a>
@@ -27,5 +18,8 @@
 </div>
 
 <div>
-  <ScoreButtons {token} />
+  <ScoreButtons
+    {token}
+    onUpdate={(updatedToken) => (token = { ...token, ...updatedToken })}
+  />
 </div>

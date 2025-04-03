@@ -3,7 +3,13 @@
   import type { tokensTable } from "./server/db/schema";
 
   let dialog: HTMLDialogElement;
-  export let token: typeof tokensTable.$inferSelect;
+
+  const { token, onUpdate } = $props<{
+    token: typeof tokensTable.$inferSelect;
+    onUpdate: {
+      (updatedToken: typeof tokensTable.$inferSelect): void;
+    };
+  }>();
 
   function handleBackdropClick(event: Event) {
     if (event.target === dialog) dialog.close();
@@ -12,12 +18,12 @@
 
 <dialog
   bind:this={dialog}
-  on:click={handleBackdropClick}
+  onclick={handleBackdropClick}
   class="backdrop:bg-black/50 backdrop:backdrop-blur-md mx-auto my-8 p-4 max-w-xl w-full relative rounded-sm"
 >
   <button
     class="absolute top-2 right-2 p-2 cursor-pointer"
-    on:click={() => {
+    onclick={() => {
       dialog.close();
     }}
   >
@@ -29,7 +35,7 @@
       <rt>{token.reading}</rt>
     </ruby>
 
-    <ScoreButtons {token} />
+    <ScoreButtons {token} {onUpdate} />
 
     <div>
       <a href={`/tokens/${token.id}`}>Details</a>
@@ -37,9 +43,9 @@
   </div>
 </dialog>
 
-<button
+<span
   class={`cursor-pointer ${token.score <= 0 && "text-red-700"}`}
-  on:click={() => dialog.showModal()}
+  onclick={() => dialog.showModal()}
 >
   {token.surface_form}
-</button>
+</span>
