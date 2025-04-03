@@ -3,16 +3,11 @@
   import { page } from "$app/state";
 </script>
 
+<a href="/">← Home</a>
+
 <h2 class="text-2xl">Auth</h2>
 <div>
   {#if page.data.session}
-    {#if page.data.session.user?.image}
-      <img
-        src={page.data.session.user.image}
-        class="avatar"
-        alt="User Avatar"
-      />
-    {/if}
     <span class="signedInText">
       <small>Signed in as</small><br />
       <strong>{page.data.session.user?.name ?? "User"}</strong>
