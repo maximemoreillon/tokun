@@ -12,11 +12,11 @@
 
   let loading = $state(false);
 
-  async function setScore(score: number) {
+  async function setKnown(known: boolean) {
     loading = true;
     const response = await fetch(`/api/tokens/${token.id}`, {
       method: "PUT",
-      body: JSON.stringify({ score }),
+      body: JSON.stringify({ known }),
     });
     const updatedToken = await response.json();
     // token = updatedToken; // Does not work
@@ -31,12 +31,14 @@
   {:else}
     <button
       disabled={loading}
-      class="border-1 border-green-700 px-1 py-0.5 cursor-pointer"
-      onclick={() => setScore(1)}>I know this token</button
+      class={`border-1 border-green-700 px-1 py-0.5 rounded cursor-pointer ${token.known && "bg-green-200"}`}
+      onclick={() => setKnown(true)}>I know this token</button
     >
     <button
-      class="border-1 border-red-700 px-1 py-0.5 cursor-pointer"
-      onclick={() => setScore(-1)}
+      class={`border-1 border-red-700 rounded px-1 py-0.5 cursor-pointer ${
+        !token.known && "bg-red-200"
+      }`}
+      onclick={() => setKnown(false)}
       disabled={loading}
     >
       I don'tknow this token

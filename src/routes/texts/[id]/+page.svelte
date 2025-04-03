@@ -31,7 +31,7 @@
 <a href="/texts">← Return to texts</a>
 
 <div class="flex justify-between">
-  <h2 class="text-2xl">Text</h2>
+  <h2 class="text-2xl">Text {data.text.id}</h2>
   <button onclick={() => handleDeleteButtonClick()}>Delete</button>
 </div>
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ScoreButtons from "$lib/scoreButtons.svelte";
+  import KnownButtons from "$lib/knownButtons.svelte";
   import type { PageProps } from "./$types";
 
   let { data: token }: PageProps = $props();
@@ -14,11 +14,7 @@
 </ruby>
 
 <div>
-  Score: {token.score}
-</div>
-
-<div>
-  <ScoreButtons
+  <KnownButtons
     {token}
     onUpdate={(updatedToken) => (token = { ...token, ...updatedToken })}
   />

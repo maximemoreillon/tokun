@@ -1,4 +1,11 @@
-import { pgTable, serial, text, integer, timestamp } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  serial,
+  text,
+  integer,
+  timestamp,
+  boolean,
+} from "drizzle-orm/pg-core";
 
 export const textsTable = pgTable("texts", {
   id: serial().primaryKey(),
@@ -12,8 +19,9 @@ export const tokensTable = pgTable("tokens", {
   pos: text().notNull(),
   reading: text(),
   // Custom additions
-  meaning: text(),
+  meaning: text(), // Currently unused
   score: integer().default(0).notNull(),
+  known: boolean(),
 });
 
 export const textTokensTable = pgTable("text_tokens", {

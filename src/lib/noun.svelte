@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ScoreButtons from "./scoreButtons.svelte";
+  import KnwonButtons from "./knownButtons.svelte";
   import type { tokensTable } from "./server/db/schema";
 
   let dialog: HTMLDialogElement;
@@ -35,7 +35,7 @@
       <rt>{token.reading}</rt>
     </ruby>
 
-    <ScoreButtons {token} {onUpdate} />
+    <KnwonButtons {token} {onUpdate} />
 
     <div>
       <a href={`/tokens/${token.id}`}>Details</a>
@@ -44,7 +44,7 @@
 </dialog>
 
 <span
-  class={`cursor-pointer ${token.score <= 0 && "text-red-700"}`}
+  class={`cursor-pointer ${!token.known && "text-red-700"}`}
   onclick={() => dialog.showModal()}
   onkeydown={() => {}}
 >
