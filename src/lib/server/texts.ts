@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { count, eq } from "drizzle-orm";
 import { textsTable, textTokensTable, tokensTable } from "./db/schema";
 import { db } from "./db";
 import { tokenizePromiseFactory } from "$lib/server/tokenizer";
@@ -45,8 +45,14 @@ export async function registerText(content: string) {
   return registeredText;
 }
 
-export async function readTexts() {
+type ReadTextsOptions = {
+  limit?: number;
+  offset?: number;
+};
+
+export async function readTexts(options: ReadTextsOptions = {}) {
   // TODO: pagination
+  const { limit = 10, offset = 0 } = options;
 
   // Using query to easily get the tokens of each text
   const texts = await db.query.textsTable.findMany({
@@ -57,11 +63,15 @@ export async function readTexts() {
         },
       },
     },
-    limit: 10,
-    offset: 0,
+    limit,
+    offset,
   });
 
-  return { items: texts };
+  const [{ count: total }] = await db
+    .select({ count: count() })
+    .from(textsTable);
+
+  return { total, items: texts, offset, limit };
 }
 
 export async function getTextAndTokens(textId: number) {

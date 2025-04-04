@@ -1,6 +1,6 @@
 <script lang="ts">
   import { tokenIsValid } from "$lib";
-  import { validPosList } from "$lib/config";
+  import Pagination from "$lib/pagination.svelte";
   import type { PageProps } from "./$types";
 
   let { data }: PageProps = $props();
@@ -11,31 +11,6 @@
 <h2 class="text-2xl">Texts</h2>
 
 <a href="/texts/new">Register new text</a>
-
-<!-- <table class="w-full">
-  <thead>
-    <tr>
-      <th> Timestamp </th>
-      <th> Content </th>
-      <th> See </th>
-    </tr>
-  </thead>
-  <tbody>
-    {#each data.items as text}
-      <tr>
-        <td>
-          {new Date(text.timestamp).toLocaleDateString()}
-        </td>
-        <td>
-          {text.content.slice(0, 20)}
-        </td>
-        <td>
-          <a href={`/texts/${text.id}`}>See</a>
-        </td>
-      </tr>
-    {/each}
-  </tbody>
-</table> -->
 
 {#each data.items as text}
   <a
@@ -64,3 +39,10 @@
     </div>
   </a>
 {/each}
+
+<Pagination
+  offset={data.offset}
+  limit={data.limit}
+  total={data.total}
+  route="/texts"
+/>

@@ -1,9 +1,16 @@
-import { and, eq, inArray, isNotNull, not } from "drizzle-orm";
+import { and, count, eq, inArray, isNotNull, not } from "drizzle-orm";
 import { db } from "./db";
 import { tokensTable } from "./db/schema";
 import { validPosList } from "$lib/config";
 
-export async function readTokens() {
+type ReadTokensOptions = {
+  limit?: number;
+  offset?: number;
+};
+
+export async function readTokens(options: ReadTokensOptions = {}) {
+  const { limit = 5, offset = 0 } = options;
+
   // TODO: pagination
   const tokens = await db
     .select()
@@ -14,10 +21,14 @@ export async function readTokens() {
         isNotNull(tokensTable.reading)
       )
     )
-    .limit(100)
-    .offset(0);
+    .limit(limit)
+    .offset(offset);
 
-  return { items: tokens };
+  const [{ count: total }] = await db
+    .select({ count: count() })
+    .from(tokensTable);
+
+  return { total, items: tokens, offset, limit };
 }
 
 export async function readToken(id: number) {

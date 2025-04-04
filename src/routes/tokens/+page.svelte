@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Pagination from "$lib/pagination.svelte";
   import type { PageProps } from "./$types";
 
   let { data }: PageProps = $props();
@@ -28,3 +29,10 @@
     {/each}
   </tbody>
 </table>
+
+<Pagination
+  offset={data.offset}
+  limit={data.limit}
+  total={data.total}
+  route="/tokens"
+/>
