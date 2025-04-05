@@ -1,5 +1,6 @@
 <script lang="ts">
-  import KnwonButtons from "./knownButtons.svelte";
+  import IgnoredCheckbox from "./ignoredCheckbox.svelte";
+  import KnownCheckbox from "./knownCheckbox.svelte";
   import type { tokensTable } from "./server/db/schema";
 
   let backdrop: HTMLDivElement;
@@ -23,7 +24,7 @@
   onclick={handleBackdropClick}
   class="fixed top-0 left-0 right-0 bottom-0 bg-black/50 backdrop-blur-md flex justify-center items-center"
 >
-  <div class="bg-white p-4 relative flex flex-col items-center rounded gap-4">
+  <div class="bg-white p-8 relative flex flex-col items-center rounded gap-4">
     <button
       class="absolute top-2 right-2 p-2 cursor-pointer"
       onclick={() => {
@@ -32,12 +33,16 @@
     >
       X
     </button>
-    <ruby class="text-2xl">
+
+    <ruby class="text-3xl">
       {token.surface_form}
       <rt>{token.reading}</rt>
     </ruby>
 
-    <KnwonButtons {token} {onUpdate} />
+    {#if !token.ignored}
+      <KnownCheckbox {token} {onUpdate} />
+    {/if}
+    <IgnoredCheckbox {token} {onUpdate} />
 
     <div>
       <a href={`/tokens/${token.id}`}>Details</a>

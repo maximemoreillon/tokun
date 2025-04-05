@@ -1,5 +1,5 @@
 <script lang="ts">
-  import KnownButtons from "$lib/knownButtons.svelte";
+  import KnownCheckbox from "$lib/knownCheckbox.svelte";
   import type { PageProps } from "./$types";
 
   let { data: token }: PageProps = $props();
@@ -14,7 +14,7 @@
 </ruby>
 
 <div>
-  <KnownButtons
+  <KnownCheckbox
     {token}
     onUpdate={(updatedToken) => (token = { ...token, ...updatedToken })}
   />

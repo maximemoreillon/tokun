@@ -21,15 +21,17 @@
 
 <div class="flex justify-between my-4">
   <h2 class="text-2xl">Register new text</h2>
+</div>
 
+<textarea bind:value={content} class="w-full border-1 p-2 rounded-sm min-h-100"
+></textarea>
+
+<div class="my-4 flex justify-center">
   <button
     on:click={() => handleClick()}
-    class="border-1 rounded-sm px-2 py-1"
+    class="rounded px-2 py-1 bg-red-700 text-white"
     disabled={loading}
   >
     {loading ? "Loading..." : "Register"}
   </button>
 </div>
-
-<textarea bind:value={content} class="w-full border-1 p-2 rounded-sm min-h-100"
-></textarea>

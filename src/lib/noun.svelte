@@ -47,7 +47,7 @@
 </dialog> -->
 
 <span
-  class={`cursor-pointer ${!token.known && "text-red-700"}`}
+  class={`cursor-pointer ${!token.known && !token.ignored && "text-red-700"}`}
   onclick={() => onTokenClicked()}
   onkeydown={() => {}}
 >

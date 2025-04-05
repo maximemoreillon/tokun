@@ -25,23 +25,16 @@
   }
 </script>
 
-<div>
+<div class="text-xl flex items-center gap-4">
   {#if loading}
     <div>Loading...</div>
   {:else}
-    <button
-      disabled={loading}
-      class={`border-1 border-green-700 px-1 py-0.5 rounded cursor-pointer ${token.known && "bg-green-200"}`}
-      onclick={() => setKnown(true)}>I know this token</button
-    >
-    <button
-      class={`border-1 border-red-700 rounded px-1 py-0.5 cursor-pointer ${
-        !token.known && "bg-red-200"
-      }`}
-      onclick={() => setKnown(false)}
-      disabled={loading}
-    >
-      I don'tknow this token
-    </button>
+    <input
+      class="cursor-pointer w-5 h-5"
+      type="checkbox"
+      checked={token.known}
+      onchange={() => setKnown(!token.known)}
+    />
+    <label>Known</label>
   {/if}
 </div>

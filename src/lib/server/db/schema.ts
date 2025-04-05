@@ -21,8 +21,9 @@ export const tokensTable = pgTable("tokens", {
   reading: text(),
   // Custom additions
   meaning: text(), // Currently unused
-  score: integer().default(0).notNull(),
+  score: integer().default(0).notNull(), // unused
   known: boolean(),
+  ignored: boolean(),
 });
 
 export const textTokensTable = pgTable("text_tokens", {
