@@ -1,4 +1,4 @@
-import { count, eq } from "drizzle-orm";
+import { count, desc, eq } from "drizzle-orm";
 import { textsTable, textTokensTable, tokensTable } from "./db/schema";
 import { db } from "./db";
 import { tokenizePromiseFactory } from "$lib/server/tokenizer";
@@ -64,6 +64,7 @@ export async function readTexts(options: ReadTextsOptions = {}) {
     },
     limit,
     offset,
+    orderBy: (textsTable) => [desc(textsTable.timestamp)],
   });
 
   const [{ count: total }] = await db
