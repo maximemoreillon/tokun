@@ -25,16 +25,17 @@
   }
 </script>
 
-<div class="text-xl flex items-center gap-4">
+<div>
   {#if loading}
     <div>Loading...</div>
   {:else}
     <input
+      id="known_checkbox"
       class="cursor-pointer w-5 h-5"
       type="checkbox"
       checked={token.known}
       onchange={() => setKnown(!token.known)}
     />
-    <label>Known</label>
+    <label for="known_checkbox" class="text-xl">Known</label>
   {/if}
 </div>

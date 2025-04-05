@@ -43,11 +43,12 @@
       I don'tknow this token
     </button> -->
     <input
+      id="ignored_checkbox"
       type="checkbox"
       checked={token.ignored}
       onchange={() => setIgnored(!token.ignored)}
     />
 
-    <label>Ignored</label>
+    <label for="ignored_checkbox">Ignored</label>
   {/if}
 </div>
