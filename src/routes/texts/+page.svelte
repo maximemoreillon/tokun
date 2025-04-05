@@ -8,9 +8,13 @@
 
 <a href="/">← Home</a>
 
-<h2 class="text-2xl">Texts</h2>
+<div class="flex justify-between">
+  <h2 class="text-2xl">Texts</h2>
 
-<a href="/texts/new">Register new text</a>
+  <a href="/texts/new" class="rounded py-1 px-2 bg-red-700 text-white"
+    >Register new text</a
+  >
+</div>
 
 {#each data.items as text}
   <a

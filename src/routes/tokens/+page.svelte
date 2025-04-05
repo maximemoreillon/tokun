@@ -7,7 +7,12 @@
 
 <a href="/">← Home</a>
 
-<h2>Tokens</h2>
+<div class="my-4 flex justify-between">
+  <h2 class="text-2xl">Tokens</h2>
+  <div>
+    Total: {data.total}
+  </div>
+</div>
 
 <table class="w-full">
   <thead>
