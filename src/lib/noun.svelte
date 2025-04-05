@@ -19,7 +19,7 @@
 <dialog
   bind:this={dialog}
   onclick={handleBackdropClick}
-  class="backdrop:bg-black/50 backdrop:backdrop-blur-md mx-auto my-8 p-4 max-w-xl w-full relative rounded-sm"
+  class="backdrop:bg-black/50 backdrop:backdrop-blur-md mx-auto my-8 p-4 relative rounded-sm"
 >
   <button
     class="absolute top-2 right-2 p-2 cursor-pointer"

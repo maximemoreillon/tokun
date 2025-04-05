@@ -30,9 +30,4 @@
   </tbody>
 </table>
 
-<Pagination
-  offset={data.offset}
-  limit={data.limit}
-  total={data.total}
-  route="/tokens"
-/>
+<Pagination offset={data.offset} limit={data.limit} total={data.total} />

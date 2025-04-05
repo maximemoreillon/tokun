@@ -40,9 +40,4 @@
   </a>
 {/each}
 
-<Pagination
-  offset={data.offset}
-  limit={data.limit}
-  total={data.total}
-  route="/texts"
-/>
+<Pagination offset={data.offset} limit={data.limit} total={data.total} />
