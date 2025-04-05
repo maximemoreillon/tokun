@@ -51,7 +51,6 @@ type ReadTextsOptions = {
 };
 
 export async function readTexts(options: ReadTextsOptions = {}) {
-  // TODO: pagination
   const { limit = 10, offset = 0 } = options;
 
   // Using query to easily get the tokens of each text

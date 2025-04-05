@@ -9,9 +9,8 @@ type ReadTokensOptions = {
 };
 
 export async function readTokens(options: ReadTokensOptions = {}) {
-  const { limit = 5, offset = 0 } = options;
+  const { limit = 100, offset = 0 } = options;
 
-  // TODO: pagination
   const tokens = await db
     .select()
     .from(tokensTable)
