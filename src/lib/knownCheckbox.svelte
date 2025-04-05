@@ -29,13 +29,14 @@
   {#if loading}
     <div>Loading...</div>
   {:else}
-    <input
-      id="known_checkbox"
-      class="cursor-pointer w-5 h-5"
-      type="checkbox"
-      checked={token.known}
-      onchange={() => setKnown(!token.known)}
-    />
-    <label for="known_checkbox" class="text-xl">Known</label>
+    <label>
+      <input
+        class="cursor-pointer w-5 h-5"
+        type="checkbox"
+        checked={token.known}
+        onchange={() => setKnown(!token.known)}
+      />
+      Known
+    </label>
   {/if}
 </div>
