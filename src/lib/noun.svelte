@@ -1,22 +1,25 @@
 <script lang="ts">
-  import KnwonButtons from "./knownButtons.svelte";
+  // import KnwonButtons from "./knownButtons.svelte";
   import type { tokensTable } from "./server/db/schema";
 
-  let dialog: HTMLDialogElement;
+  // let dialog: HTMLDialogElement;
 
-  const { token, onUpdate } = $props<{
+  const { token, onTokenClicked } = $props<{
     token: typeof tokensTable.$inferSelect;
-    onUpdate: {
-      (updatedToken: typeof tokensTable.$inferSelect): void;
-    };
+    onTokenClicked: () => void;
+
+    // onUpdate: {
+    //   (updatedToken: typeof tokensTable.$inferSelect): void;
+    // };
   }>();
 
-  function handleBackdropClick(event: Event) {
-    if (event.target === dialog) dialog.close();
-  }
+  // function handleBackdropClick(event: Event) {
+  //   if (event.target === dialog) dialog.close();
+  // }
 </script>
 
-<dialog
+<!-- Problem: dialog creates a space -->
+<!-- <dialog
   bind:this={dialog}
   onclick={handleBackdropClick}
   class="backdrop:bg-black/50 backdrop:backdrop-blur-md mx-auto my-8 p-4 relative rounded-sm"
@@ -41,11 +44,11 @@
       <a href={`/tokens/${token.id}`}>Details</a>
     </div>
   </div>
-</dialog>
+</dialog> -->
 
 <span
   class={`cursor-pointer ${!token.known && "text-red-700"}`}
-  onclick={() => dialog.showModal()}
+  onclick={() => onTokenClicked()}
   onkeydown={() => {}}
 >
   {token.surface_form}

@@ -4,8 +4,11 @@
   import { validPosList } from "$lib/config";
   import type { tokensTable } from "$lib/server/db/schema";
   import { goto } from "$app/navigation";
+  import TokenDialog from "$lib/tokenDialog.svelte";
 
   let { data }: PageProps = $props();
+
+  let selectedTokenIndex: number | null = $state(null);
 
   // This seems to have been necessary
   const tokens = $state(data.tokens);
@@ -39,8 +42,19 @@
   {#if token.surface_form.includes("\n")}
     <br />
   {:else if validPosList.includes(token.pos) && token.reading}
-    <Noun token={tokens[index]} {onUpdate} />
+    <Noun
+      token={tokens[index]}
+      onTokenClicked={() => (selectedTokenIndex = index)}
+    />
   {:else}
     <span>{token.surface_form}</span>
   {/if}
 {/each}
+
+{#if selectedTokenIndex !== null}
+  <TokenDialog
+    token={tokens[selectedTokenIndex]}
+    {onUpdate}
+    onClose={() => (selectedTokenIndex = null)}
+  />
+{/if}
