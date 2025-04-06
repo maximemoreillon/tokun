@@ -11,7 +11,7 @@
 <div class="my-4 flex justify-between">
   <h2 class="text-2xl">Tokens</h2>
   <div>
-    Total: {data.total}
+    Known/Total: {data.known}/{data.total}
   </div>
 </div>
 

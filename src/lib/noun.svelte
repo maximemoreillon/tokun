@@ -1,16 +1,32 @@
 <script lang="ts">
   import type { tokensTable } from "./server/db/schema";
 
-  const { token, onTokenClicked } = $props<{
+  type Options = {
+    highlightUnknown: boolean;
+    highlightKnown: boolean;
+  };
+  const {
+    token,
+    onTokenClicked,
+    options = { highlightUknown: true, highlightKnown: false },
+  } = $props<{
     token: typeof tokensTable.$inferSelect;
     onTokenClicked: () => void;
+    options?: Options;
   }>();
+
+  const getClass = () => {
+    const classes = ["cursor-pointer"];
+
+    if (options.highlightUnknown && !token.known && !token.ignored)
+      classes.push("text-red-700");
+    else if (options.highlightKnown && token.known)
+      classes.push("text-green-700");
+
+    return classes.join(" ");
+  };
 </script>
 
-<span
-  class={`cursor-pointer ${!token.known && !token.ignored && "text-red-700"}`}
-  onclick={() => onTokenClicked()}
-  onkeydown={() => {}}
->
+<span class={getClass()} onclick={() => onTokenClicked()} onkeydown={() => {}}>
   {token.surface_form}
 </span>

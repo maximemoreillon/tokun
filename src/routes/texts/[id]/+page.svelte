@@ -10,6 +10,10 @@
   let { data }: PageProps = $props();
 
   let selectedTokenIndex: number | null = $state(null);
+  let options = $state({
+    highlightUnknown: true,
+    highlightKnown: false,
+  });
 
   // This seems to have been necessary
   const tokens = $state(data.tokens);
@@ -46,6 +50,17 @@
   >
 </div>
 
+<div class="flex gap-2 my-4">
+  <label>
+    <input type="checkbox" bind:checked={options.highlightUnknown} />
+    Highlight unknown
+  </label>
+  <label>
+    <input type="checkbox" bind:checked={options.highlightKnown} />
+    Highlight known
+  </label>
+</div>
+
 {#each tokens as token, index}
   {#if token.surface_form.includes("\n")}
     <br />
@@ -53,6 +68,7 @@
     <Noun
       token={tokens[index]}
       onTokenClicked={() => (selectedTokenIndex = index)}
+      {options}
     />
   {:else}
     <span>{token.surface_form}</span>

@@ -27,7 +27,12 @@ export async function readTokens(options: ReadTokensOptions = {}) {
     .select({ count: count() })
     .from(tokensTable);
 
-  return { total, items: tokens, offset, limit };
+  const [{ count: known }] = await db
+    .select({ count: count() })
+    .from(tokensTable)
+    .where(eq(tokensTable.known, true));
+
+  return { total, items: tokens, offset, limit, known };
 }
 
 export async function readToken(id: number) {
