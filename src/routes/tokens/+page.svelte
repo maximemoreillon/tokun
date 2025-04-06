@@ -10,8 +10,12 @@
 
 <div class="my-4 flex justify-between">
   <h2 class="text-2xl">Tokens</h2>
-  <div>
-    Known/Total: {data.known}/{data.total}
+  <div class="flex flex-col items-center">
+    <div>Known / Total</div>
+    <div>
+      <span class="text-green-700">{data.known}</span>
+      / {data.total}
+    </div>
   </div>
 </div>
 
@@ -24,12 +28,12 @@
   </thead>
   <tbody>
     {#each data.items as token}
-      <tr>
+      <tr class="border-t-1 border-gray-200">
         <td class="text-center">
           <a href={`/tokens/${token.id}`}>{token.surface_form}</a>
         </td>
         <td class="text-center">
-          {token.known && "✅"}
+          {token.known ? "✅" : "❌"}
         </td>
       </tr>
     {/each}
