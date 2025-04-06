@@ -1,21 +1,13 @@
 <script lang="ts">
-  import KnownCheckbox from "$lib/knownCheckbox.svelte";
+  import ReturnLink from "$lib/returnLink.svelte";
+  import TokenDetails from "$lib/tokenDetails.svelte";
   import type { PageProps } from "./$types";
 
   let { data: token }: PageProps = $props();
 </script>
 
-<a href="/tokens">← Return to tokens</a>
-<h2 class="text-2xl">Token</h2>
+<ReturnLink />
 
-<ruby class="my-4 text-2xl">
-  {token.surface_form}
-  <rt>{token.reading}</rt>
-</ruby>
-
-<div>
-  <KnownCheckbox
-    {token}
-    onUpdate={(updatedToken) => (token = { ...token, ...updatedToken })}
-  />
+<div class="my-4 flex justify-center">
+  <TokenDetails {token} />
 </div>

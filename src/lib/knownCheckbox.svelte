@@ -8,8 +8,6 @@
     };
   }>();
 
-  // export let token: typeof tokensTable.$inferSelect;
-
   let loading = $state(false);
 
   async function setKnown(known: boolean) {
@@ -19,7 +17,6 @@
       body: JSON.stringify({ known }),
     });
     const updatedToken = await response.json();
-    // token = updatedToken; // Does not work
     onUpdate(updatedToken);
     loading = false;
   }

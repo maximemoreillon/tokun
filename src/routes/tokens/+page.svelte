@@ -1,11 +1,12 @@
 <script lang="ts">
   import Pagination from "$lib/pagination.svelte";
+  import ReturnLink from "$lib/returnLink.svelte";
   import type { PageProps } from "./$types";
 
   let { data }: PageProps = $props();
 </script>
 
-<a href="/">← Home</a>
+<ReturnLink />
 
 <div class="my-4 flex justify-between">
   <h2 class="text-2xl">Tokens</h2>

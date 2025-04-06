@@ -1,5 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import ReturnLink from "$lib/returnLink.svelte";
 
   let content: string = ``;
   let loading = false;
@@ -17,7 +18,7 @@
   }
 </script>
 
-<a href="/texts">← Return to texts</a>
+<ReturnLink />
 
 <div class="flex justify-between my-4">
   <h2 class="text-2xl">Register new text</h2>

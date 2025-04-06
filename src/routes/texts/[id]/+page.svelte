@@ -5,7 +5,7 @@
   import type { tokensTable } from "$lib/server/db/schema";
   import { goto } from "$app/navigation";
   import TokenDialog from "$lib/tokenDialog.svelte";
-  import { text } from "@sveltejs/kit";
+  import ReturnLink from "$lib/returnLink.svelte";
 
   let { data }: PageProps = $props();
 
@@ -33,7 +33,7 @@
   }
 </script>
 
-<a href="/texts">← Return to texts</a>
+<ReturnLink />
 
 <div class="flex justify-between my-4">
   <div>

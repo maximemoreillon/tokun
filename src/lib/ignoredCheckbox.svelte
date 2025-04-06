@@ -8,8 +8,6 @@
     };
   }>();
 
-  // export let token: typeof tokensTable.$inferSelect;
-
   let loading = $state(false);
 
   async function setIgnored(ignored: boolean) {
@@ -28,20 +26,6 @@
   {#if loading}
     <div>Loading...</div>
   {:else}
-    <!-- <button
-      disabled={loading}
-      class={`border-1 border-green-700 px-1 py-0.5 rounded cursor-pointer ${token.known && "bg-green-200"}`}
-      onclick={() => setKnown(true)}>I know this token</button
-    >
-    <button
-      class={`border-1 border-red-700 rounded px-1 py-0.5 cursor-pointer ${
-        !token.known && "bg-red-200"
-      }`}
-      onclick={() => setKnown(false)}
-      disabled={loading}
-    >
-      I don'tknow this token
-    </button> -->
     <label>
       <input
         type="checkbox"
