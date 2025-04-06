@@ -5,13 +5,13 @@
 
   const { token, onUpdate } = $props<{
     token: typeof tokensTable.$inferSelect;
-    onUpdate?: {
+    onUpdate: {
       (updatedToken: typeof tokensTable.$inferSelect): void;
     };
   }>();
 </script>
 
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-4 items-center">
   <ruby class="text-3xl">
     {token.surface_form}
     <rt>{token.reading}</rt>

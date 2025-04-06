@@ -8,6 +8,15 @@
 
 <ReturnLink />
 
-<div class="my-4 flex justify-center">
-  <TokenDetails {token} />
+<div class="my-4 flex flex-col items-center">
+  <TokenDetails
+    {token}
+    onUpdate={(updatedToken) => {
+      token = { ...token, ...updatedToken };
+    }}
+  />
+
+  <div class="my-4">
+    Occurences: {token.occurences}
+  </div>
 </div>

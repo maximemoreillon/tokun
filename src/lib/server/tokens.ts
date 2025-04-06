@@ -1,6 +1,6 @@
 import { and, count, eq, inArray, isNotNull, not } from "drizzle-orm";
 import { db } from "./db";
-import { tokensTable } from "./db/schema";
+import { textTokensTable, tokensTable } from "./db/schema";
 import { validPosList } from "$lib/config";
 
 type ReadTokensOptions = {
@@ -41,7 +41,12 @@ export async function readToken(id: number) {
     .from(tokensTable)
     .where(eq(tokensTable.id, id));
 
-  return token;
+  const [{ count: occurences }] = await db
+    .select({ count: count() })
+    .from(textTokensTable)
+    .where(eq(textTokensTable.token_id, id));
+
+  return { ...token, occurences };
 }
 
 export async function updateToken(id: number, properties: any) {
