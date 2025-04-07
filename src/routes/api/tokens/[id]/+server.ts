@@ -1,6 +1,10 @@
 import { updateToken } from "$lib/server/tokens";
 
-export async function PUT({ params, request }) {
+export async function PUT({ params, request, locals }) {
+  const session = await locals.auth();
+  if (!session?.user?.name) throw new Error("Unauthorized");
+  const user_id = session.user.name;
+
   const id = Number(params.id);
   const properties = await request.json();
 

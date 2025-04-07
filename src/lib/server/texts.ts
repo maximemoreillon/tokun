@@ -3,10 +3,16 @@ import { textsTable, textTokensTable, tokensTable } from "./db/schema";
 import { db } from "./db";
 import { tokenizePromiseFactory } from "$lib/server/tokenizer";
 
-export async function registerText(content: string) {
+export async function registerText({
+  content,
+  user_id,
+}: {
+  content: string;
+  user_id: string;
+}) {
   const [registeredText] = await db
     .insert(textsTable)
-    .values({ content })
+    .values({ content, user_id })
     .returning();
 
   const tokens = await tokenizePromiseFactory(content);
@@ -24,7 +30,7 @@ export async function registerText(content: string) {
     if (!token_id) {
       const [createdToken] = await db
         .insert(tokensTable)
-        .values(token)
+        .values({ ...token, user_id })
         .onConflictDoNothing()
         .returning();
 
@@ -46,12 +52,13 @@ export async function registerText(content: string) {
 }
 
 type ReadTextsOptions = {
+  user_id: string;
   limit?: number;
   offset?: number;
 };
 
-export async function readTexts(options: ReadTextsOptions = {}) {
-  const { limit = 10, offset = 0 } = options;
+export async function readTexts(options: ReadTextsOptions) {
+  const { user_id, limit = 10, offset = 0 } = options;
 
   // Using query to easily get the tokens of each text
   const texts = await db.query.textsTable.findMany({
@@ -64,12 +71,14 @@ export async function readTexts(options: ReadTextsOptions = {}) {
     },
     limit,
     offset,
+    where: eq(textsTable.user_id, user_id),
     orderBy: (textsTable) => [desc(textsTable.timestamp)],
   });
 
   const [{ count: total }] = await db
     .select({ count: count() })
-    .from(textsTable);
+    .from(textsTable)
+    .where(eq(textsTable.user_id, user_id));
 
   return { total, items: texts, offset, limit };
 }

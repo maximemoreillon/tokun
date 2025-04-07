@@ -12,6 +12,7 @@ export const textsTable = pgTable("texts", {
   id: serial().primaryKey(),
   content: text().notNull().unique(),
   timestamp: timestamp().notNull().defaultNow(),
+  user_id: text().notNull(),
 });
 
 export const tokensTable = pgTable("tokens", {
@@ -21,9 +22,9 @@ export const tokensTable = pgTable("tokens", {
   reading: text(),
   // Custom additions
   meaning: text(), // Currently unused
-  score: integer().default(0).notNull(), // unused
   known: boolean(),
   ignored: boolean(),
+  user_id: text().notNull(),
 });
 
 export const textTokensTable = pgTable("text_tokens", {
