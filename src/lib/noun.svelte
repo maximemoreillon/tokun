@@ -18,9 +18,10 @@
   const getClass = () => {
     const classes = ["cursor-pointer"];
 
-    if (options.highlightUnknown && !token.known && !token.ignored)
+    if (options.highlightUnknown && !token.known && !token.ignored) {
       classes.push("text-red-700");
-    else if (options.highlightKnown && token.known)
+      if (token.important) classes.push("font-bold");
+    } else if (options.highlightKnown && token.known)
       classes.push("text-green-700");
 
     return classes.join(" ");

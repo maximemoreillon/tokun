@@ -24,6 +24,7 @@ export const tokensTable = pgTable("tokens", {
   meaning: text(), // Currently unused
   known: boolean(),
   ignored: boolean(),
+  important: boolean(),
   user_id: text().notNull(),
 });
 

@@ -26,7 +26,7 @@
     <TokenDetails {token} {onUpdate} />
 
     <div class="flex gap-4 justify-end">
-      <!-- <a href={`/tokens/${token.id}`}>Details</a> -->
+      <a href={`/tokens/${token.id}`}>Details</a>
       <button class="cursor-pointer" onclick={onClose}> Close </button>
     </div>
   </div>

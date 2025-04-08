@@ -1,5 +1,6 @@
 <script lang="ts">
   import IgnoredCheckbox from "./ignoredCheckbox.svelte";
+  import ImportantCheckbox from "./importantCheckbox.svelte";
   import KnownCheckbox from "./knownCheckbox.svelte";
   import type { tokensTable } from "./server/db/schema";
 
@@ -19,6 +20,11 @@
 
   {#if !token.ignored}
     <KnownCheckbox {token} {onUpdate} />
+    {#if !token.known}
+      <ImportantCheckbox {token} {onUpdate} />
+    {/if}
   {/if}
-  <IgnoredCheckbox {token} {onUpdate} />
+  {#if !token.known}
+    <IgnoredCheckbox {token} {onUpdate} />
+  {/if}
 </div>
