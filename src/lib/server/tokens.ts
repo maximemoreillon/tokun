@@ -7,10 +7,11 @@ type ReadTokensOptions = {
   user_id: string;
   limit?: number;
   offset?: number;
+  important?: boolean;
 };
 
 export async function readTokens(options: ReadTokensOptions) {
-  const { user_id, limit = 100, offset = 0 } = options;
+  const { user_id, limit = 100, offset = 0, important = true } = options;
 
   const tokens = await db
     .select()
@@ -20,6 +21,7 @@ export async function readTokens(options: ReadTokensOptions) {
         inArray(tokensTable.pos, validPosList),
         isNotNull(tokensTable.reading),
         eq(tokensTable.user_id, user_id)
+        // eq(tokensTable.important, important)
       )
     )
     .limit(limit)

@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import Pagination from "$lib/pagination.svelte";
   import ReturnLink from "$lib/returnLink.svelte";
+  import TokensFilters from "$lib/tokensFilters.svelte";
   import type { PageProps } from "./$types";
-
+  const { searchParams } = page.url;
   let { data }: PageProps = $props();
 </script>
 
@@ -18,6 +20,8 @@
     </div>
   </div>
 </div>
+
+<TokensFilters />
 
 <table class="w-full">
   <thead>

@@ -10,11 +10,13 @@ export const load: PageServerLoad = async ({ url, locals }) => {
   const { searchParams } = url;
   const limit = searchParams.get("limit");
   const offset = searchParams.get("offset");
+  const important = searchParams.get("important");
 
   const result = await readTokens({
     user_id,
     limit: limit ? Number(limit) : undefined,
     offset: offset ? Number(offset) : undefined,
+    important: important ? important === "true" : undefined,
   });
   return result;
 };
