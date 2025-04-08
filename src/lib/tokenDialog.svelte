@@ -25,7 +25,7 @@
   <div class="bg-white p-8 relative flex flex-col items-center rounded gap-4">
     <TokenDetails {token} {onUpdate} />
 
-    <div class="flex gap-4 justify-end">
+    <div class="flex gap-4 justify-between">
       <a href={`/tokens/${token.id}`}>Details</a>
       <button class="cursor-pointer" onclick={onClose}> Close </button>
     </div>
