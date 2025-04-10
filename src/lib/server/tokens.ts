@@ -8,10 +8,11 @@ type ReadTokensOptions = {
   limit?: number;
   offset?: number;
   important?: boolean;
+  known?: boolean;
 };
 
 export async function readTokens(options: ReadTokensOptions) {
-  const { user_id, limit = 100, offset = 0, important = true } = options;
+  const { user_id, limit = 100, offset = 0, important, known } = options;
 
   const tokens = await db
     .select()
@@ -20,8 +21,9 @@ export async function readTokens(options: ReadTokensOptions) {
       and(
         inArray(tokensTable.pos, validPosList),
         isNotNull(tokensTable.reading),
-        eq(tokensTable.user_id, user_id)
-        // eq(tokensTable.important, important)
+        eq(tokensTable.user_id, user_id),
+        important ? eq(tokensTable.important, important) : undefined,
+        known ? eq(tokensTable.known, known) : undefined
       )
     )
     .limit(limit)
@@ -32,12 +34,13 @@ export async function readTokens(options: ReadTokensOptions) {
     .from(tokensTable)
     .where(eq(tokensTable.user_id, user_id));
 
-  const [{ count: known }] = await db
+  //  Mighht be a bity too much
+  const [{ count: knownCount }] = await db
     .select({ count: count() })
     .from(tokensTable)
     .where(and(eq(tokensTable.known, true), eq(tokensTable.user_id, user_id)));
 
-  return { total, items: tokens, offset, limit, known };
+  return { total, items: tokens, offset, limit, known: knownCount };
 }
 
 export async function readToken(id: number) {

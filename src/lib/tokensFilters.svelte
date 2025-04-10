@@ -3,11 +3,14 @@
   import { page } from "$app/state";
   const { searchParams, pathname } = page.url;
 
-  function handleImportantChecked() {
-    searchParams.set(
-      "important",
-      searchParams.get("important") === "true" ? "false" : "true"
-    );
+  function handleChanged(e: Event, key: string) {
+    const target = e.target as HTMLSelectElement;
+
+    const importance = target.value;
+
+    if (importance)
+      searchParams.set(key, importance === "true" ? "true" : "false");
+    else searchParams.delete(key);
 
     goto(`${pathname}?${searchParams.toString()}`);
   }
@@ -15,7 +18,30 @@
 
 <div>
   <label>
-    <input type="checkbox" onchange={() => handleImportantChecked()} />
-    Important
+    Importance:
+    <select
+      onchange={(e) => {
+        handleChanged(e, "important");
+      }}
+      value={searchParams.get("importance")}
+    >
+      <option value="true">Important</option>
+      <option value="false">Not important</option>
+      <option value={null}>Any</option>
+    </select>
+  </label>
+
+  <label>
+    Known:
+
+    <select
+      onchange={(e) => {
+        handleChanged(e, "known");
+      }}
+    >
+      <option value="true">Known</option>
+      <option value="false">Unknown</option>
+      <option value={null}>Any</option>
+    </select>
   </label>
 </div>

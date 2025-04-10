@@ -4,7 +4,6 @@
   import ReturnLink from "$lib/returnLink.svelte";
   import TokensFilters from "$lib/tokensFilters.svelte";
   import type { PageProps } from "./$types";
-  const { searchParams } = page.url;
   let { data }: PageProps = $props();
 </script>
 
@@ -26,8 +25,9 @@
 <table class="w-full">
   <thead>
     <tr>
-      <th>surface_form</th>
-      <th>known</th>
+      <th>Token</th>
+      <th>Known</th>
+      <th>Important</th>
     </tr>
   </thead>
   <tbody>
@@ -38,6 +38,9 @@
         </td>
         <td class="text-center">
           {token.known ? "✅" : "❌"}
+        </td>
+        <td class="text-center">
+          {token.important ? "❗" : ""}
         </td>
       </tr>
     {/each}
