@@ -1,8 +1,9 @@
 <script lang="ts">
+  import { page } from "$app/state";
   import Pagination from "$lib/pagination.svelte";
   import ReturnLink from "$lib/returnLink.svelte";
+  import TokensFilters from "$lib/tokensFilters.svelte";
   import type { PageProps } from "./$types";
-
   let { data }: PageProps = $props();
 </script>
 
@@ -19,11 +20,14 @@
   </div>
 </div>
 
+<TokensFilters />
+
 <table class="w-full">
   <thead>
     <tr>
-      <th>surface_form</th>
-      <th>known</th>
+      <th>Token</th>
+      <th>Known</th>
+      <th>Important</th>
     </tr>
   </thead>
   <tbody>
@@ -34,6 +38,9 @@
         </td>
         <td class="text-center">
           {token.known ? "✅" : "❌"}
+        </td>
+        <td class="text-center">
+          {token.important ? "❗" : ""}
         </td>
       </tr>
     {/each}
