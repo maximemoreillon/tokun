@@ -36,6 +36,7 @@
 
     <select
       class="rounded border-1"
+      value={searchParams.get("known")}
       onchange={(e) => {
         handleChanged(e, "known");
       }}
