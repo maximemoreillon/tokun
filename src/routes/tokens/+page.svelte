@@ -15,7 +15,7 @@
 
 <TokensFilters />
 
-<table class="w-full">
+<table class="w-full my-4">
   <thead>
     <tr>
       <th>Token</th>
