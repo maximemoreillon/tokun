@@ -6,20 +6,20 @@
   function handleChanged(e: Event, key: string) {
     const target = e.target as HTMLSelectElement;
 
-    const importance = target.value;
+    const { value } = target;
 
-    if (importance)
-      searchParams.set(key, importance === "true" ? "true" : "false");
+    if (value) searchParams.set(key, value);
     else searchParams.delete(key);
 
     goto(`${pathname}?${searchParams.toString()}`);
   }
 </script>
 
-<div>
+<div class="flex gap-4">
   <label>
     Importance:
     <select
+      class="rounded border-1"
       onchange={(e) => {
         handleChanged(e, "important");
       }}
@@ -35,6 +35,7 @@
     Known:
 
     <select
+      class="rounded border-1"
       onchange={(e) => {
         handleChanged(e, "known");
       }}

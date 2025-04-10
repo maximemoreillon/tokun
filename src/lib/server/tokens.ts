@@ -1,4 +1,13 @@
-import { and, count, eq, inArray, isNotNull, not } from "drizzle-orm";
+import {
+  and,
+  count,
+  eq,
+  inArray,
+  isNotNull,
+  isNull,
+  not,
+  or,
+} from "drizzle-orm";
 import { db } from "./db";
 import { textTokensTable, tokensTable } from "./db/schema";
 import { validPosList } from "$lib/config";
@@ -14,33 +23,39 @@ type ReadTokensOptions = {
 export async function readTokens(options: ReadTokensOptions) {
   const { user_id, limit = 100, offset = 0, important, known } = options;
 
+  function importanceFilter() {
+    if (important === undefined) return undefined;
+    if (important) return eq(tokensTable.important, true);
+    else return not(eq(tokensTable.important, true));
+  }
+
+  function knownFilter() {
+    if (known === undefined) return undefined;
+    if (known) return eq(tokensTable.known, true);
+    else return or(eq(tokensTable.known, false), isNull(tokensTable.known));
+  }
+
+  const where = and(
+    inArray(tokensTable.pos, validPosList),
+    isNotNull(tokensTable.reading),
+    eq(tokensTable.user_id, user_id),
+    importanceFilter(),
+    knownFilter()
+  );
+
   const tokens = await db
     .select()
     .from(tokensTable)
-    .where(
-      and(
-        inArray(tokensTable.pos, validPosList),
-        isNotNull(tokensTable.reading),
-        eq(tokensTable.user_id, user_id),
-        important ? eq(tokensTable.important, important) : undefined,
-        known ? eq(tokensTable.known, known) : undefined
-      )
-    )
+    .where(where)
     .limit(limit)
     .offset(offset);
 
   const [{ count: total }] = await db
     .select({ count: count() })
     .from(tokensTable)
-    .where(eq(tokensTable.user_id, user_id));
+    .where(where);
 
-  //  Mighht be a bity too much
-  const [{ count: knownCount }] = await db
-    .select({ count: count() })
-    .from(tokensTable)
-    .where(and(eq(tokensTable.known, true), eq(tokensTable.user_id, user_id)));
-
-  return { total, items: tokens, offset, limit, known: knownCount };
+  return { total, items: tokens, offset, limit };
 }
 
 export async function readToken(id: number) {

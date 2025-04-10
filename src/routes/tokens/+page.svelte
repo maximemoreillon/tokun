@@ -11,13 +11,6 @@
 
 <div class="my-4 flex justify-between">
   <h2 class="text-2xl">Tokens</h2>
-  <div class="flex flex-col items-center">
-    <div>Known / Total</div>
-    <div>
-      <span class="text-green-700">{data.known}</span>
-      / {data.total}
-    </div>
-  </div>
 </div>
 
 <TokensFilters />
