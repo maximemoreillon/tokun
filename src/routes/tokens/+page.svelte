@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from "$app/state";
   import Pagination from "$lib/pagination.svelte";
-  import ReturnLink from "$lib/returnLink.svelte";
+  import ReturnLink from "$lib/returnLink.client.svelte";
   import TokensFilters from "$lib/tokensFilters.svelte";
   import type { PageProps } from "./$types";
   let { data }: PageProps = $props();

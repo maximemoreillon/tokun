@@ -1,9 +1,10 @@
 <script>
   import { SignIn, SignOut } from "@auth/sveltekit/components";
   import { page } from "$app/state";
+  import ReturnLink from "$lib/returnLink.svelte";
 </script>
 
-<a href="/">← Home</a>
+<ReturnLink />
 
 <h2 class="text-2xl">Auth</h2>
 <div>
