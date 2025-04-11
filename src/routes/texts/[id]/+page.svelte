@@ -13,6 +13,7 @@
   let options = $state({
     highlightUnknown: true,
     highlightKnown: false,
+    highlightIgnored: false,
   });
 
   // This seems to have been necessary
@@ -51,13 +52,18 @@
 </div>
 
 <div class="flex gap-2 my-4">
+  Highlight:
   <label>
     <input type="checkbox" bind:checked={options.highlightUnknown} />
-    Highlight unknown
+    Unknown
   </label>
   <label>
     <input type="checkbox" bind:checked={options.highlightKnown} />
-    Highlight known
+    Known
+  </label>
+  <label>
+    <input type="checkbox" bind:checked={options.highlightIgnored} />
+    Ignored
   </label>
 </div>
 
