@@ -62,13 +62,13 @@ export async function readTexts(options: ReadTextsOptions) {
 
   // Using query to easily get the tokens of each text
   const texts = await db.query.textsTable.findMany({
-    with: {
-      textTokens: {
-        with: {
-          token: {},
-        },
-      },
-    },
+    // with: {
+    //   textTokens: {
+    //     with: {
+    //       token: {},
+    //     },
+    //   },
+    // },
     limit,
     offset,
     where: eq(textsTable.user_id, user_id),

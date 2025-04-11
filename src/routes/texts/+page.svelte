@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { tokenIsValid } from "$lib";
+  // import { tokenIsValid } from "$lib";
   import Pagination from "$lib/pagination.svelte";
   import ReturnLink from "$lib/returnLink.svelte";
   import type { PageProps } from "./$types";
@@ -27,14 +27,14 @@
       <div>
         {new Date(text.timestamp).toLocaleDateString()}
       </div>
-      <div>
+      <!-- <div>
         <span class="text-red-700">
           {text.textTokens.filter(
             ({ token }: any) => tokenIsValid(token) && !token.known
           ).length}
         </span>
         /{text.textTokens.length}
-      </div>
+      </div> -->
     </div>
 
     <div
