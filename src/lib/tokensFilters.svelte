@@ -23,7 +23,7 @@
       onchange={(e) => {
         handleChanged(e, "important");
       }}
-      value={searchParams.get("importance")}
+      value={searchParams.get("important")}
     >
       <option value="true">Important</option>
       <option value="false">Not important</option>
