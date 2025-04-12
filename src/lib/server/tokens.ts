@@ -26,7 +26,11 @@ export async function readTokens(options: ReadTokensOptions) {
   function importanceFilter() {
     if (important === undefined) return undefined;
     if (important) return eq(tokensTable.important, true);
-    else return not(eq(tokensTable.important, true));
+    else
+      return or(
+        eq(tokensTable.important, false),
+        isNull(tokensTable.important)
+      );
   }
 
   function knownFilter() {
