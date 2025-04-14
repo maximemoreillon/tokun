@@ -9,7 +9,7 @@ import {
   or,
 } from "drizzle-orm";
 import { db } from "./db";
-import { textTokensTable, tokensTable } from "./db/schema";
+import { textsTable, textTokensTable, tokensTable } from "./db/schema";
 import { validPosList } from "$lib/config";
 
 type ReadTokensOptions = {
@@ -73,7 +73,17 @@ export async function readToken(id: number) {
     .from(textTokensTable)
     .where(eq(textTokensTable.token_id, id));
 
-  return { ...token, occurences };
+  // TODO: for now limited to 10 texts
+  const tokenTexts = await db
+    .select()
+    .from(textTokensTable)
+    .where(eq(textTokensTable.token_id, id))
+    .innerJoin(textsTable, eq(textTokensTable.text_id, textsTable.id))
+    .limit(10);
+
+  const texts = tokenTexts.map(({ texts }) => texts);
+
+  return { ...token, occurences, texts };
 }
 
 export async function updateToken(id: number, properties: any) {

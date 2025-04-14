@@ -1,5 +1,6 @@
 <script lang="ts">
   import ReturnLink from "$lib/returnLink.svelte";
+  import TextPreview from "$lib/textPreview.svelte";
   import TokenDetails from "$lib/tokenDetails.svelte";
   import type { PageProps } from "./$types";
 
@@ -15,8 +16,14 @@
       token = { ...token, ...updatedToken };
     }}
   />
+</div>
 
-  <div class="my-4">
+<div>
+  <div>
     Occurences: {token.occurences}
   </div>
+
+  {#each token.texts as text}
+    <TextPreview {text} />
+  {/each}
 </div>
