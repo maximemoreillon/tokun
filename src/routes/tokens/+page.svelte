@@ -25,7 +25,7 @@
   </thead>
   <tbody>
     {#each data.items as token}
-      <tr class="border-t-1 border-gray-200">
+      <tr class="border-t-1 border-gray-400">
         <td class="text-center">
           <a href={`/tokens/${token.id}`}>{token.surface_form}</a>
         </td>
