@@ -22,7 +22,9 @@
   onclick={handleBackdropClick}
   class="fixed top-0 left-0 right-0 bottom-0 bg-black/50 backdrop-blur-md flex justify-center items-center"
 >
-  <div class="bg-white p-8 relative flex flex-col items-center rounded gap-4">
+  <div
+    class="bg-white dark:bg-gray-800 p-8 relative flex flex-col items-center rounded gap-4 shadow"
+  >
     <TokenDetails {token} {onUpdate} />
 
     <div class="flex gap-4 justify-between">
