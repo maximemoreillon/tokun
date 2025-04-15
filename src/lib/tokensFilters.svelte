@@ -19,7 +19,7 @@
   <label>
     Importance:
     <select
-      class="rounded border-1"
+      class="ml-1 rounded border-1 px-1"
       onchange={(e) => {
         handleChanged(e, "important");
       }}
@@ -35,7 +35,7 @@
     Known:
 
     <select
-      class="rounded border-1"
+      class="ml-1 rounded border-1 px-1"
       value={searchParams.get("known")}
       onchange={(e) => {
         handleChanged(e, "known");
