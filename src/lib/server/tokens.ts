@@ -79,9 +79,16 @@ export async function readToken(id: number) {
     .from(textTokensTable)
     .where(eq(textTokensTable.token_id, id))
     .innerJoin(textsTable, eq(textTokensTable.text_id, textsTable.id))
-    .limit(10);
+    .limit(100);
 
-  const texts = tokenTexts.map(({ texts }) => texts);
+  // Formatting texts, removing dupicates
+  // TODO: find simpler way to do this
+  const texts = tokenTexts
+    .map(({ texts }) => texts)
+    .reduce((acc: (typeof textsTable.$inferSelect)[], t) => {
+      if (!acc.find((f) => f.id === t.id)) acc.push(t);
+      return acc;
+    }, []);
 
   return { ...token, occurences, texts };
 }
