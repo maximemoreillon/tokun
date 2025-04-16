@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { browser } from "$app/environment";
+
   function loadThemeFromLocalSorage() {
+    if (!browser) return;
     const html = document.querySelector("html");
     if (!html) return;
     const theme = localStorage.getItem("theme");
