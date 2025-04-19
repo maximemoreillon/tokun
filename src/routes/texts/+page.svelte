@@ -13,13 +13,13 @@
 <div class="flex justify-between">
   <h2 class="text-2xl">Texts</h2>
 
-  <a href="/texts/new" class="rounded py-1 px-2 bg-red-700 text-white">
-    Register new text
-  </a>
+  <a href="/texts/new" class="btn btn-primary"> Register new text </a>
 </div>
 
-{#each data.items as text}
-  <TextPreview {text} />
-{/each}
+<div class="flex flex-col gap-2">
+  {#each data.items as text}
+    <TextPreview {text} />
+  {/each}
+</div>
 
 <Pagination offset={data.offset} limit={data.limit} total={data.total} />

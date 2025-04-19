@@ -10,23 +10,23 @@
 <ReturnLink />
 
 <h2 class="text-2xl">Tokens</h2>
-<div class="my-4 flex justify-between">
-  <div>{data.total} tokens</div>
+<div class="my-4 flex justify-between items-center">
   <TokensFilters />
+  <div>{data.total} tokens</div>
 </div>
 
-<table class="w-full my-4">
+<table class="w-full my-4 table">
   <thead>
     <tr>
       <th>Token</th>
-      <th>Known</th>
-      <th>Important</th>
+      <th class="text-center">Known</th>
+      <th class="text-center">Important</th>
     </tr>
   </thead>
   <tbody>
     {#each data.items as token}
-      <tr class="border-t-1 border-gray-400">
-        <td class="text-center">
+      <tr class="">
+        <td class="">
           <a href={`/tokens/${token.id}`}>{token.surface_form}</a>
         </td>
         <td class="text-center">

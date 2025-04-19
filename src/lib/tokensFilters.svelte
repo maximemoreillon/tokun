@@ -17,9 +17,9 @@
 
 <div class="flex gap-4">
   <label>
-    Importance:
+    Importance
     <select
-      class="ml-1 rounded border-1 px-1"
+      class="select"
       onchange={(e) => {
         handleChanged(e, "important");
       }}
@@ -32,10 +32,10 @@
   </label>
 
   <label>
-    Known:
+    Known
 
     <select
-      class="ml-1 rounded border-1 px-1"
+      class="select"
       value={searchParams.get("known")}
       onchange={(e) => {
         handleChanged(e, "known");

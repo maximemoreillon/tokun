@@ -6,24 +6,26 @@
 
 <a
   href={`/texts/${text.id}`}
-  class="block border-1 rounded p-2 w-full my-2"
+  class="block card card-border card-s"
   aria-label="text"
 >
-  <div class="flex justify-between">
-    <div>
-      {new Date(text.timestamp).toLocaleDateString()}
-    </div>
-    <!-- <div>
+  <div class="card-body">
+    <div class="flex justify-between">
+      <div>
+        {new Date(text.timestamp).toLocaleDateString()}
+      </div>
+      <!-- <div>
         <span class="text-red-700">
           {text.textTokens.filter(
             ({ token }: any) => tokenIsValid(token) && !token.known
-          ).length}
-        </span>
-        /{text.textTokens.length}
+            ).length}
+            </span>
+            /{text.textTokens.length}
       </div> -->
-  </div>
+    </div>
 
-  <div class="mt-2 w-full overflow-hidden overflow-ellipsis whitespace-nowrap">
-    {text.content}
+    <div class="mt-1 w-full truncate">
+      {text.content}
+    </div>
   </div>
 </a>

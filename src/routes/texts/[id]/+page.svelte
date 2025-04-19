@@ -46,23 +46,34 @@
   </div>
   <button
     onclick={() => handleDeleteButtonClick()}
-    class="py-1 px-2 rounded border-1 border-red-700 text-red-700"
-    >Delete</button
+    class="btn btn-error btn-outline">Delete</button
   >
 </div>
 
 <div class="flex gap-2 my-4">
   Highlight:
   <label>
-    <input type="checkbox" bind:checked={options.highlightUnknown} />
+    <input
+      type="checkbox"
+      bind:checked={options.highlightUnknown}
+      class="checkbox"
+    />
     Unknown
   </label>
   <label>
-    <input type="checkbox" bind:checked={options.highlightKnown} />
+    <input
+      type="checkbox"
+      bind:checked={options.highlightKnown}
+      class="checkbox"
+    />
     Known
   </label>
   <label>
-    <input type="checkbox" bind:checked={options.highlightIgnored} />
+    <input
+      type="checkbox"
+      bind:checked={options.highlightIgnored}
+      class="checkbox"
+    />
     Ignored
   </label>
 </div>

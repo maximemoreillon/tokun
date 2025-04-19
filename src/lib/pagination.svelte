@@ -10,7 +10,7 @@
   }
 </script>
 
-<div class="flex justify-center gap-4">
+<div class="flex justify-center gap-4 my-4">
   {#if offset > 0}
     <a href={pageHref(-1)}>Prev</a>
   {/if}

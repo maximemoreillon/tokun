@@ -1,2 +1,8 @@
 @import "tailwindcss";
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@plugin "daisyui";
+/* @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *)); */
+
+/* TODO: not sure if correct way to override */
+:root {
+  --color-primary: #b91c1c;
+}

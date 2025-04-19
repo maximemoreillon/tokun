@@ -30,7 +30,7 @@
 <div class="my-4 flex justify-center">
   <button
     on:click={() => handleClick()}
-    class="rounded px-2 py-1 bg-red-700 text-white"
+    class="btn btn-primary"
     disabled={loading}
   >
     {loading ? "Loading..." : "Register"}
