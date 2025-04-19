@@ -4,6 +4,7 @@
   import Pagination from "$lib/pagination.svelte";
   import ReturnLink from "$lib/returnLink.svelte";
   import type { PageProps } from "./$types";
+  import TextList from "$lib/textList.svelte";
 
   let { data }: PageProps = $props();
 </script>
@@ -16,10 +17,11 @@
   <a href="/texts/new" class="btn btn-primary"> Register new text </a>
 </div>
 
-<div class="flex flex-col gap-2">
+<TextList texts={data.items} />
+<!-- <div class="flex flex-col gap-2">
   {#each data.items as text}
     <TextPreview {text} />
   {/each}
-</div>
+</div> -->
 
 <Pagination offset={data.offset} limit={data.limit} total={data.total} />

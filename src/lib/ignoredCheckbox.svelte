@@ -29,6 +29,7 @@
     <label>
       <input
         type="checkbox"
+        class="checkbox"
         checked={token.ignored}
         onchange={() => setIgnored(!token.ignored)}
       />

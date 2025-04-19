@@ -28,6 +28,7 @@
   {:else}
     <label>
       <input
+        class="checkbox"
         type="checkbox"
         checked={token.important}
         onchange={() => setimportant(!token.important)}

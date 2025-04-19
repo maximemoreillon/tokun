@@ -28,7 +28,7 @@
   {:else}
     <label>
       <input
-        class="cursor-pointer w-5 h-5"
+        class="checkbox checkbox-lg"
         type="checkbox"
         checked={token.known}
         onchange={() => setKnown(!token.known)}
