@@ -9,10 +9,13 @@
 
 <ReturnLink />
 
-<h2 class="text-2xl">Tokens</h2>
 <div class="my-4 flex justify-between items-center">
+  <div>
+    <h2 class="text-2xl">Tokens</h2>
+    <div class="text-sm">Total: {data.total}</div>
+  </div>
+
   <TokensFilters />
-  <div>{data.total} tokens</div>
 </div>
 
 <table class="w-full my-4 table">

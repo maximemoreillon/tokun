@@ -10,8 +10,8 @@
 
 <ReturnLink />
 
-<div class="flex justify-between">
-  <h2 class="text-2xl">Texts</h2>
+<div class="flex justify-between my-4">
+  <h2 class="text-3xl">Texts</h2>
 
   <a href="/texts/new" class="btn btn-primary"> Register new text </a>
 </div>

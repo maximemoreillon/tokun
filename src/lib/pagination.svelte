@@ -10,11 +10,11 @@
   }
 </script>
 
-<div class="flex justify-center gap-4 my-4">
+<div class="join my-4 flex justify-center">
   {#if offset > 0}
-    <a href={pageHref(-1)}>Prev</a>
+    <a href={pageHref(-1)} class="join-item btn">«</a>
   {/if}
   {#if offset + limit < total}
-    <a href={pageHref(1)}>Next</a>
+    <a href={pageHref(1)} class="join-item btn">»</a>
   {/if}
 </div>
