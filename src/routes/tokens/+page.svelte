@@ -21,7 +21,7 @@
 <table class="w-full my-4 table">
   <thead>
     <tr>
-      <th>Token</th>
+      <th class="text-center">Token</th>
       <th class="text-center">Known</th>
       <th class="text-center">Important</th>
     </tr>
@@ -29,7 +29,7 @@
   <tbody>
     {#each data.items as token}
       <tr class="">
-        <td class="">
+        <td class="text-center">
           <a href={`/tokens/${token.id}`}>{token.surface_form}</a>
         </td>
         <td class="text-center">
