@@ -7,8 +7,6 @@
   let { data }: PageProps = $props();
 </script>
 
-<ReturnLink />
-
 <div class="my-4 flex justify-between items-center">
   <div>
     <h2 class="text-2xl">Tokens</h2>

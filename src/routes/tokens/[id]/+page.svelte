@@ -1,7 +1,6 @@
 <script lang="ts">
   import ReturnLink from "$lib/returnLink.svelte";
   import TextList from "$lib/textList.svelte";
-  import TextPreview from "$lib/textPreview.svelte";
   import TokenDetails from "$lib/tokenDetails.svelte";
   import type { PageProps } from "./$types";
 

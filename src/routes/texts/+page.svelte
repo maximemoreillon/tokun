@@ -9,8 +9,6 @@
   let { data }: PageProps = $props();
 </script>
 
-<ReturnLink />
-
 <div class="flex justify-between my-4">
   <h2 class="text-3xl">Texts</h2>
 
