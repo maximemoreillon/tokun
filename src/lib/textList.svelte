@@ -8,7 +8,7 @@
   {#each texts as text}
     <li class="list-row">
       <a href={`/texts/${text.id}`} aria-label="text">
-        <div class="text-xs">
+        <div class="text-sm">
           {new Date(text.timestamp).toLocaleDateString()}
         </div>
 

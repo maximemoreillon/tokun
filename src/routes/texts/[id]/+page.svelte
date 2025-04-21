@@ -40,42 +40,44 @@
 
 <ReturnLink />
 
-<div class="flex justify-between my-4">
+<div class="flex justify-between my-4 items-center">
   <div>
-    {data.text.timestamp.toLocaleDateString()}
+    <div>
+      {data.text.timestamp.toLocaleDateString()}
+    </div>
+    <div class="flex gap-2 mt-2">
+      Highlight:
+      <label class={options.highlightUnknown ? "text-red-700" : undefined}>
+        <input
+          type="checkbox"
+          bind:checked={options.highlightUnknown}
+          class="checkbox"
+        />
+        <span> Unknown </span>
+      </label>
+      <label class={options.highlightKnown ? "text-green-700" : undefined}>
+        <input
+          type="checkbox"
+          bind:checked={options.highlightKnown}
+          class="checkbox"
+        />
+        Known
+      </label>
+      <label class={options.highlightIgnored ? "text-gray-400" : undefined}>
+        <input
+          type="checkbox"
+          bind:checked={options.highlightIgnored}
+          class="checkbox"
+        />
+        Ignored
+      </label>
+    </div>
   </div>
+
   <button
     onclick={() => handleDeleteButtonClick()}
     class="btn btn-error btn-outline">Delete</button
   >
-</div>
-
-<div class="flex gap-2 my-4">
-  Highlight:
-  <label>
-    <input
-      type="checkbox"
-      bind:checked={options.highlightUnknown}
-      class="checkbox"
-    />
-    Unknown
-  </label>
-  <label>
-    <input
-      type="checkbox"
-      bind:checked={options.highlightKnown}
-      class="checkbox"
-    />
-    Known
-  </label>
-  <label>
-    <input
-      type="checkbox"
-      bind:checked={options.highlightIgnored}
-      class="checkbox"
-    />
-    Ignored
-  </label>
 </div>
 
 {#each tokens as token, index}

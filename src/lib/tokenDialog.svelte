@@ -2,7 +2,7 @@
   import type { tokensTable } from "./server/db/schema";
   import TokenDetails from "./tokenDetails.svelte";
 
-  let backdrop: HTMLDivElement;
+  let backdrop: HTMLDialogElement;
 
   const { token, onUpdate, onClose } = $props<{
     token: typeof tokensTable.$inferSelect;
@@ -17,19 +17,14 @@
   }
 </script>
 
-<div
-  bind:this={backdrop}
-  onclick={handleBackdropClick}
-  class="fixed top-0 left-0 right-0 bottom-0 bg-black/50 backdrop-blur-md flex justify-center items-center"
->
-  <div
-    class="bg-white dark:bg-gray-800 p-8 relative flex flex-col items-center rounded gap-4 shadow"
-  >
+<!-- TODO: still not a correct use of the dialog element -->
+<dialog onclick={handleBackdropClick} class="modal" open bind:this={backdrop}>
+  <div class="modal-box w-sm">
     <TokenDetails {token} {onUpdate} />
 
-    <div class="flex gap-4 justify-between">
-      <a href={`/tokens/${token.id}`}>Details</a>
-      <button class="cursor-pointer" onclick={onClose}> Close </button>
+    <div class="modal-action">
+      <a href={`/tokens/${token.id}`} class="btn btn-outline">Details</a>
+      <button class="btn" onclick={onClose}> Close </button>
     </div>
   </div>
-</div>
+</dialog>
