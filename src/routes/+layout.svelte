@@ -10,10 +10,8 @@
 </svelte:head>
 
 <header class="navbar">
-  <div class="navbar-start">
+  <div class="navbar-start flex gap-8">
     <h1 class="text-4xl">Tokun</h1>
-  </div>
-  <div class="navbar-center">
     <div role="tablist" class="tabs tabs-border">
       <a
         role="tab"
