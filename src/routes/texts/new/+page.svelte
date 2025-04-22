@@ -24,8 +24,7 @@
   <h2 class="text-2xl">Register new text</h2>
 </div>
 
-<textarea bind:value={content} class="w-full border-1 p-2 rounded-sm min-h-100"
-></textarea>
+<textarea bind:value={content} class="w-full textarea min-h-100"></textarea>
 
 <div class="my-4 flex justify-center">
   <button

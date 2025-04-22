@@ -13,7 +13,7 @@
 </script>
 
 <div class="flex flex-col gap-4 items-center">
-  <ruby class="text-5xl">
+  <ruby class="text-4xl">
     {token.surface_form}
     <rt>{token.reading}</rt>
   </ruby>
