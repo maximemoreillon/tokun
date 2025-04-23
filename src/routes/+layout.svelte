@@ -10,7 +10,7 @@
   <title>Tokun</title>
 </svelte:head>
 
-<header class="navbar bg-primary">
+<header class="navbar">
   <div class="navbar-start flex gap-8">
     <h1 class="text-4xl">Tokun</h1>
     <div role="tablist" class="tabs tabs-border">

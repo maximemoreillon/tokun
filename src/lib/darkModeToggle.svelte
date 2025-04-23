@@ -1,13 +1,19 @@
 <script lang="ts">
   import { browser } from "$app/environment";
 
-  let theme = "light";
+  // TODO: would be nice to get those from DaisyUI directly
+  const themes = {
+    light: "wireframe",
+    dark: "black",
+  };
+
+  let theme = themes.light;
 
   function loadThemeFromLocalSorage() {
     if (!browser) return;
     const html = document.querySelector("html");
     if (!html) return;
-    theme = localStorage.getItem("theme") || "light";
+    theme = localStorage.getItem("theme") || themes.light;
     html.setAttribute("data-theme", theme);
   }
 
@@ -15,7 +21,7 @@
     const html = document.querySelector("html");
     if (!html) return;
     const currentTheme = html.getAttribute("data-theme");
-    theme = currentTheme === "dark" ? "light" : "dark";
+    theme = currentTheme === themes.dark ? themes.light : themes.dark;
     html.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }
@@ -28,7 +34,7 @@
   <input
     type="checkbox"
     class="theme-controller"
-    checked={theme === "dark"}
+    checked={theme === themes.dark}
     onchange={() => changeTheme()}
   />
 
