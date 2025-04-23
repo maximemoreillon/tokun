@@ -14,12 +14,12 @@
 }
 @plugin "daisyui/theme" {
   name: "wireframe";
-  --color-primary: #b91c1c;
+  /* --color-primary: #b91c1c; */
 }
 
 @plugin "daisyui/theme" {
   name: "black";
-  --color-primary: #b91c1c;
+  /* --color-primary: #b91c1c; */
 }
 
 /* TODO: not sure if correct way to override */
