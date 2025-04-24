@@ -13,7 +13,7 @@
   <div class="text-sm">Total: {data.total}</div>
 </div>
 
-<div class="my-4 flex justify-between items-center">
+<div class="my-4 flex justify-between items-center flex-wrap gap-4">
   <TokensSearch />
   <TokensFilters />
 </div>
