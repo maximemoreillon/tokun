@@ -2,6 +2,7 @@ import {
   and,
   count,
   eq,
+  ilike,
   inArray,
   isNotNull,
   isNull,
@@ -18,10 +19,18 @@ type ReadTokensOptions = {
   offset?: number;
   important?: boolean;
   known?: boolean;
+  search?: string;
 };
 
 export async function readTokens(options: ReadTokensOptions) {
-  const { user_id, limit = 100, offset = 0, important, known } = options;
+  const {
+    user_id,
+    limit = 100,
+    offset = 0,
+    important,
+    known,
+    search,
+  } = options;
 
   function importanceFilter() {
     if (important === undefined) return undefined;
@@ -44,7 +53,8 @@ export async function readTokens(options: ReadTokensOptions) {
     isNotNull(tokensTable.reading),
     eq(tokensTable.user_id, user_id),
     importanceFilter(),
-    knownFilter()
+    knownFilter(),
+    search ? ilike(tokensTable.surface_form, `%${search}%`) : undefined
   );
 
   const tokens = await db

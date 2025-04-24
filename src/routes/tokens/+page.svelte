@@ -3,16 +3,18 @@
   import Pagination from "$lib/pagination.svelte";
   import ReturnLink from "$lib/returnLink.svelte";
   import TokensFilters from "$lib/tokensFilters.svelte";
+  import TokensSearch from "$lib/tokensSearch.svelte";
   import type { PageProps } from "./$types";
   let { data }: PageProps = $props();
 </script>
 
 <div class="my-4 flex justify-between items-center">
-  <div>
-    <h2 class="text-2xl">Tokens</h2>
-    <div class="text-sm">Total: {data.total}</div>
-  </div>
+  <h2 class="text-2xl">Tokens</h2>
+  <div class="text-sm">Total: {data.total}</div>
+</div>
 
+<div class="my-4 flex justify-between items-center">
+  <TokensSearch />
   <TokensFilters />
 </div>
 

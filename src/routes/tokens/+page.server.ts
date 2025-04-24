@@ -12,6 +12,7 @@ export const load: PageServerLoad = async ({ url, locals }) => {
   const offset = searchParams.get("offset");
   const important = searchParams.get("important");
   const known = searchParams.get("known");
+  const search = searchParams.get("search");
 
   const result = await readTokens({
     user_id,
@@ -20,6 +21,7 @@ export const load: PageServerLoad = async ({ url, locals }) => {
     // dirty
     important: important !== null ? important === "true" : undefined,
     known: known !== null ? known === "true" : undefined,
+    search: search !== null ? search : undefined,
   });
   return result;
 };
