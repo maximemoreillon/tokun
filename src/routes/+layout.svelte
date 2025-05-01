@@ -11,7 +11,7 @@
   <title>Tokun</title>
 </svelte:head>
 
-<header class="navbar">
+<header class="navbar px-4">
   <div class="navbar-start flex gap-6">
     <div class="dropdown lg:hidden">
       <div class="btn btn-ghost btn-circle" tabindex={0} role="button">
