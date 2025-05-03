@@ -37,6 +37,12 @@
   };
 </script>
 
-<span class={getClass()} onclick={() => onTokenClicked()} onkeydown={() => {}}>
+<span
+  class={getClass()}
+  onclick={() => onTokenClicked()}
+  onkeydown={() => {}}
+  role="button"
+  tabindex="0"
+>
   {token.surface_form}
 </span>
