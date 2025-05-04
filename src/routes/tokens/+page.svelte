@@ -13,8 +13,11 @@
   <div class="text-sm">Total: {data.total}</div>
 </div>
 
-<div class="my-4 flex justify-between items-center flex-wrap gap-4">
+<div
+  class="my-4 flex lg:justify-between lg:items-end lg:flex-row flex-col gap-4"
+>
   <TokensSearch />
+  <div class="lg:block hidden flex-grow"></div>
   <TokensFilters />
 </div>
 

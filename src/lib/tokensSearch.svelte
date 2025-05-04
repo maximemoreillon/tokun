@@ -1,6 +1,7 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
+  import { Search } from "@lucide/svelte";
 
   const { searchParams, pathname } = page.url;
 
@@ -17,7 +18,9 @@
   }
 </script>
 
-<form onsubmit={handleSubmit} class="flex gap-2">
-  <input type="text" bind:value={search} class="input" />
-  <input type="submit" class="btn" value="Search" />
+<form onsubmit={handleSubmit} class="flex gap-2 flex-grow">
+  <input type="text" bind:value={search} class="input flex-grow" />
+  <button type="submit" class="btn">
+    <Search />
+  </button>
 </form>

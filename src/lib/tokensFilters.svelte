@@ -16,10 +16,10 @@
 </script>
 
 <div class="flex gap-4">
-  <label>
+  <label class="flex-grow">
     Importance
     <select
-      class="select"
+      class="select w-full"
       onchange={(e) => {
         handleChanged(e, "important");
       }}
@@ -31,11 +31,11 @@
     </select>
   </label>
 
-  <label>
+  <label class="flex-grow">
     Known
 
     <select
-      class="select"
+      class="select w-full"
       value={searchParams.get("known")}
       onchange={(e) => {
         handleChanged(e, "known");
