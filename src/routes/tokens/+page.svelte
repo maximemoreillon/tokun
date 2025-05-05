@@ -1,20 +1,18 @@
 <script lang="ts">
-  import { page } from "$app/state";
   import Pagination from "$lib/pagination.svelte";
-  import ReturnLink from "$lib/returnLink.svelte";
   import TokensFilters from "$lib/tokensFilters.svelte";
   import TokensSearch from "$lib/tokensSearch.svelte";
   import type { PageProps } from "./$types";
   let { data }: PageProps = $props();
 </script>
 
-<div class="my-4 flex justify-between items-center">
+<div class="mt-4 flex justify-between items-center">
   <h2 class="text-2xl">Tokens</h2>
   <div class="text-sm">Total: {data.total}</div>
 </div>
 
 <div
-  class="my-4 flex lg:justify-between lg:items-end lg:flex-row flex-col gap-4"
+  class="my-2 flex lg:justify-between lg:items-end lg:flex-row flex-col gap-2"
 >
   <TokensSearch />
   <div class="lg:block hidden flex-grow"></div>
