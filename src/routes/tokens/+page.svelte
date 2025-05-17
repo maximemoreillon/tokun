@@ -2,6 +2,7 @@
   import Pagination from "$lib/pagination.svelte";
   import TokensFilters from "$lib/tokensFilters.svelte";
   import TokensSearch from "$lib/tokensSearch.svelte";
+  import { Check, TriangleAlert, X } from "@lucide/svelte";
   import type { PageProps } from "./$types";
   let { data }: PageProps = $props();
 </script>
@@ -33,11 +34,21 @@
         <td class="text-center">
           <a href={`/tokens/${token.id}`}>{token.surface_form}</a>
         </td>
-        <td class="text-center">
-          {token.known ? "✅" : "❌"}
+        <td>
+          <div class="flex justify-center">
+            {#if token.known}
+              <Check />
+            {:else}
+              <X />
+            {/if}
+          </div>
         </td>
         <td class="text-center">
-          {token.important ? "❗" : ""}
+          <div class="flex justify-center">
+            {#if token.important}
+              <TriangleAlert />
+            {/if}
+          </div>
         </td>
       </tr>
     {/each}
