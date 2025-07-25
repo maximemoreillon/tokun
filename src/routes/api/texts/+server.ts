@@ -1,8 +1,12 @@
 import { registerText } from "$lib/server/texts";
+import { json } from "@sveltejs/kit";
 
 export async function POST({ request, locals }) {
   const session = await locals.auth();
-  if (!session?.user?.name) throw new Error("Unauthorized");
+  if (!session?.user?.name)
+    return new Response("Unauthorized", {
+      status: 401,
+    });
   const user_id = session.user.name;
 
   const { content } = await request.json();
@@ -10,8 +14,5 @@ export async function POST({ request, locals }) {
 
   const registeredText = await registerText({ content, user_id });
 
-  return new Response(JSON.stringify(registeredText), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
+  return json(registeredText);
 }

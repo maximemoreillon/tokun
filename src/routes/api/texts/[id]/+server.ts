@@ -1,27 +1,17 @@
-import { deleteText, getTextAndTokens } from "$lib/server/texts.js";
-
-// export async function GET({ params }) {
-//   const id = Number(params.id);
-
-//   const result = await getTextAndTokens(id);
-
-//   return new Response(JSON.stringify(result), {
-//     status: 200,
-//     headers: { "Content-Type": "application/json" },
-//   });
-// }
+import { deleteText } from "$lib/server/texts.js";
+import { json } from "@sveltejs/kit";
 
 export async function DELETE({ params, locals }) {
   const session = await locals.auth();
-  if (!session?.user?.name) throw new Error("Unauthorized");
-  const user_id = session.user.name;
+  if (!session?.user?.name)
+    return new Response("Unauthorized", {
+      status: 401,
+    });
 
   const id = Number(params.id);
 
+  // TODO: only allow deleting one's texts
   await deleteText(id);
 
-  return new Response(JSON.stringify({ id }), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
+  return json({ id });
 }
