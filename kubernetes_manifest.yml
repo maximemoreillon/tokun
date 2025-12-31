@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ${APPLICATION_NAME}
+      appp.kubernetes.io/name: ${APPLICATION_NAME}
   template:
     metadata:
       labels:
-        app: ${APPLICATION_NAME}
+        appp.kubernetes.io/name: ${APPLICATION_NAME}
     spec:
       containers:
         - name: ${APPLICATION_NAME}
@@ -20,6 +20,7 @@ spec:
                 name: auth0-env
             - secretRef:
                 name: ${APPLICATION_NAME}
+          resources: {}
 
 ---
 apiVersion: v1
@@ -29,7 +30,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: ${APPLICATION_NAME}
+    appp.kubernetes.io/name: ${APPLICATION_NAME}
   ports:
     - port: 3000
 ---
@@ -39,6 +40,12 @@ metadata:
   name: ${APPLICATION_NAME}
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Tokun
+    gethomepage.dev/icon: mdi-ideogram-cjk
+    gethomepage.dev/group: 1P
+
 spec:
   tls:
     - hosts:
