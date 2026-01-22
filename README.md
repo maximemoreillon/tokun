@@ -6,5 +6,5 @@ The user can then go through each Kanji and evaluate their understanding of it.
 
 ## Tech stack
 
-The application is built using Svelte and uses kuromoji to identify Kanji.
+The application is built using Svelte and uses [kuromoji.js](https://github.com/takuyaa/kuromoji.js) to identify Kanji.
 The data is stored in a PostgreSQL database.
