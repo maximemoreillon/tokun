@@ -6,7 +6,7 @@
 
 <ReturnLink />
 
-<h2 class="text-2xl my-4">Auth</h2>
+<h2 class="text-2xl my-4">Authentication</h2>
 <div>
   {#if page.data.session}
     <div class="my-4">

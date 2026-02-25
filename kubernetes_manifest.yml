@@ -1,43 +1,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ${APPLICATION_NAME}
+  name: tokun
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: ${APPLICATION_NAME}
+      app.kubernetes.io/name: tokun
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: ${APPLICATION_NAME}
+        app.kubernetes.io/name: tokun
     spec:
       containers:
-        - name: ${APPLICATION_NAME}
+        - name: tokun
           image: ${CONTAINER_IMAGE_TAGGED}
           envFrom:
             - secretRef:
-                name: auth0-env
-            - secretRef:
-                name: ${APPLICATION_NAME}
+                name: tokun-env-from-vault
           resources: {}
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: ${APPLICATION_NAME}
+  name: tokun
 spec:
   type: ClusterIP
   selector:
-    app.kubernetes.io/name: ${APPLICATION_NAME}
+    app.kubernetes.io/name: tokun
   ports:
     - port: 3000
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ${APPLICATION_NAME}
+  name: tokun
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
 
@@ -49,16 +47,32 @@ metadata:
 spec:
   tls:
     - hosts:
-        - ${K8S_INGRESS_HOST}
-      secretName: ${APPLICATION_NAME}-tls
+        - tokun.home.maximemoreillon.com
+      secretName: tokun-tls
   rules:
-    - host: ${K8S_INGRESS_HOST}
+    - host: tokun.home.maximemoreillon.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: ${APPLICATION_NAME}
+                name: tokun
                 port:
                   number: 3000
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: tokun-env
+spec:
+  refreshInterval: 1h0m0s
+  secretStoreRef:
+    name: vault
+    kind: ClusterSecretStore
+  target:
+    name: tokun-env-from-vault
+    creationPolicy: Orphan
+  dataFrom:
+    - extract:
+        key: tokun

@@ -1,4 +1,5 @@
 import { registerText } from "$lib/server/texts";
+import { getUserId } from "$lib/utils.js";
 import { json } from "@sveltejs/kit";
 
 export async function POST({ request, locals }) {
@@ -7,7 +8,7 @@ export async function POST({ request, locals }) {
     return new Response("Unauthorized", {
       status: 401,
     });
-  const user_id = session.user.name;
+  const user_id = getUserId(session.user);
 
   const { content } = await request.json();
   if (!content) throw new Error("Missing content");
