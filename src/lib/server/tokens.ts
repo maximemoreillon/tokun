@@ -38,7 +38,7 @@ export async function readTokens(options: ReadTokensOptions) {
     else
       return or(
         eq(tokensTable.important, false),
-        isNull(tokensTable.important)
+        isNull(tokensTable.important),
       );
   }
 
@@ -54,7 +54,7 @@ export async function readTokens(options: ReadTokensOptions) {
     eq(tokensTable.user_id, user_id),
     importanceFilter(),
     knownFilter(),
-    search ? ilike(tokensTable.surface_form, `%${search}%`) : undefined
+    search ? ilike(tokensTable.surface_form, `%${search}%`) : undefined,
   );
 
   const tokens = await db
@@ -72,22 +72,29 @@ export async function readTokens(options: ReadTokensOptions) {
   return { total, items: tokens, offset, limit };
 }
 
-export async function readToken(id: number) {
+export async function readToken(options: {
+  token_id: number;
+  user_id: string;
+}) {
+  const { token_id, user_id } = options;
+
   const [token] = await db
     .select()
     .from(tokensTable)
-    .where(eq(tokensTable.id, id));
+    .where(and(eq(tokensTable.id, token_id), eq(tokensTable.user_id, user_id)));
+
+  if (!token) throw new Error("Token not found");
 
   const [{ count: occurences }] = await db
     .select({ count: count() })
     .from(textTokensTable)
-    .where(eq(textTokensTable.token_id, id));
+    .where(eq(textTokensTable.token_id, token_id));
 
   // TODO: for now limited to 10 texts
   const tokenTexts = await db
     .select()
     .from(textTokensTable)
-    .where(eq(textTokensTable.token_id, id))
+    .where(eq(textTokensTable.token_id, token_id))
     .innerJoin(textsTable, eq(textTokensTable.text_id, textsTable.id))
     .limit(100);
 
@@ -103,11 +110,22 @@ export async function readToken(id: number) {
   return { ...token, occurences, texts };
 }
 
-export async function updateToken(id: number, properties: any) {
+export async function updateToken(options: {
+  token_id: number;
+  user_id: string;
+  properties: any;
+}) {
+  const { token_id, user_id, properties } = options;
+
+  const where = and(
+    eq(tokensTable.id, token_id),
+    eq(tokensTable.user_id, user_id),
+  );
+
   const [token] = await db
     .update(tokensTable)
     .set(properties)
-    .where(eq(tokensTable.id, id))
+    .where(where)
     .returning();
 
   return token;

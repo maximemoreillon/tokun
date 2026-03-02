@@ -1,4 +1,4 @@
-import { count, desc, eq } from "drizzle-orm";
+import { and, count, desc, eq } from "drizzle-orm";
 import { textsTable, textTokensTable, tokensTable } from "./db/schema";
 import { db } from "./db";
 import { tokenizePromiseFactory } from "$lib/server/tokenizer";
@@ -83,16 +83,23 @@ export async function readTexts(options: ReadTextsOptions) {
   return { total, items: texts, offset, limit };
 }
 
-export async function getTextAndTokens(textId: number) {
-  const [text] = await db
-    .select()
-    .from(textsTable)
-    .where(eq(textsTable.id, textId));
+export async function getTextAndTokens(options: {
+  user_id: string;
+  text_id: number;
+}) {
+  const { user_id, text_id } = options;
+
+  const where = and(
+    eq(textsTable.id, text_id),
+    eq(textsTable.user_id, user_id),
+  );
+
+  const [text] = await db.select().from(textsTable).where(where);
 
   const result = await db
     .select()
     .from(textTokensTable)
-    .where(eq(textTokensTable.text_id, textId))
+    .where(eq(textTokensTable.text_id, text_id))
     .innerJoin(tokensTable, eq(textTokensTable.token_id, tokensTable.id))
     .orderBy(textTokensTable.position);
 
