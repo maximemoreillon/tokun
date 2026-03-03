@@ -3,13 +3,11 @@ import { textsTable, textTokensTable, tokensTable } from "./db/schema";
 import { db } from "./db";
 import { tokenizePromiseFactory } from "$lib/server/tokenizer";
 
-export async function registerText({
-  content,
-  user_id,
-}: {
+export async function registerText(options: {
   content: string;
   user_id: string;
 }) {
+  const { content, user_id } = options;
   const [registeredText] = await db
     .insert(textsTable)
     .values({ content, user_id })
@@ -23,7 +21,12 @@ export async function registerText({
     const [foundToken] = await db
       .select()
       .from(tokensTable)
-      .where(eq(tokensTable.surface_form, token.surface_form));
+      .where(
+        and(
+          eq(tokensTable.surface_form, token.surface_form),
+          eq(tokensTable.user_id, user_id),
+        ),
+      );
 
     token_id = foundToken?.id;
 
@@ -33,7 +36,6 @@ export async function registerText({
         .values({ ...token, user_id })
         .onConflictDoNothing()
         .returning();
-
       token_id = createdToken.id;
     }
 
@@ -96,16 +98,22 @@ export async function getTextAndTokens(options: {
 
   const [text] = await db.select().from(textsTable).where(where);
 
-  const result = await db
+  const tokensQueryResult = await db
     .select()
     .from(textTokensTable)
     .where(eq(textTokensTable.text_id, text_id))
     .innerJoin(tokensTable, eq(textTokensTable.token_id, tokensTable.id))
     .orderBy(textTokensTable.position);
 
-  return { text, tokens: result.map(({ tokens }) => tokens) };
+  return { text, tokens: tokensQueryResult.map(({ tokens }) => tokens) };
 }
 
-export async function deleteText(id: number) {
-  await db.delete(textsTable).where(eq(textsTable.id, id));
+export async function deleteText(options: {
+  text_id: number;
+  user_id: string;
+}) {
+  const { text_id, user_id } = options;
+  await db
+    .delete(textsTable)
+    .where(and(eq(textsTable.id, text_id), eq(textsTable.user_id, user_id)));
 }

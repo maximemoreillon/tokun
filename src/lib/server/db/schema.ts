@@ -8,16 +8,20 @@ import {
   boolean,
 } from "drizzle-orm/pg-core";
 
+// TODO: unique on content and user_id
+
 export const textsTable = pgTable("texts", {
   id: serial().primaryKey(),
-  content: text().notNull().unique(),
+  content: text().notNull(),
   timestamp: timestamp().notNull().defaultNow(),
   user_id: text().notNull(),
 });
 
+// TODO: unique on surface_form and user_id
+// TODO: consider having known, important in separate user table
 export const tokensTable = pgTable("tokens", {
   id: serial().primaryKey(),
-  surface_form: text().notNull().unique(),
+  surface_form: text().notNull(),
   pos: text().notNull(),
   reading: text(),
   // Custom additions

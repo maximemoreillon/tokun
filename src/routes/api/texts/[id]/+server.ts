@@ -1,4 +1,5 @@
 import { deleteText } from "$lib/server/texts.js";
+import { getUserId } from "$lib/utils";
 import { json } from "@sveltejs/kit";
 
 export async function DELETE({ params, locals }) {
@@ -8,10 +9,12 @@ export async function DELETE({ params, locals }) {
       status: 401,
     });
 
-  const id = Number(params.id);
+  if (!session?.user?.name) throw new Error("Unauthorized");
+  const user_id = getUserId(session.user);
 
-  // TODO: only allow deleting one's texts
-  await deleteText(id);
+  const text_id = Number(params.id);
 
-  return json({ id });
+  await deleteText({ text_id, user_id });
+
+  return json({ id: text_id });
 }
