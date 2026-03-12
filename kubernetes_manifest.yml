@@ -78,3 +78,17 @@ spec:
   dataFrom:
     - extract:
         key: tokun
+  data:
+    # Auth.js
+    - secretKey: AUTH_KEYCLOAK_ID
+      remoteRef:
+        key: keycloak-main-client
+        property: CLIENT_ID
+    - secretKey: AUTH_KEYCLOAK_SECRET
+      remoteRef:
+        key: keycloak-main-client
+        property: CLIENT_SECRET
+    - secretKey: AUTH_KEYCLOAK_ISSUER
+      remoteRef:
+        key: keycloak-main-client
+        property: ISSUER
