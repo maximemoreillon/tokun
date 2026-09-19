@@ -41,10 +41,10 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
 
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/name: Tokun
-    gethomepage.dev/icon: mdi-ideogram-cjk
-    gethomepage.dev/group: 1P
+    gettokun.dev/enabled: "true"
+    gettokun.dev/name: Tokun
+    gettokun.dev/icon: mdi-ideogram-cjk
+    gettokun.dev/group: 1P
 
 spec:
   tls:
@@ -92,3 +92,33 @@ spec:
       remoteRef:
         key: keycloak-main-client
         property: ISSUER
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: tokun
+  namespace: tokun
+  annotations:
+    gettokun.dev/enabled: "true"
+    gettokun.dev/name: Tokun
+    gettokun.dev/icon: mdi-ideogram-cjk
+    gettokun.dev/group: 1P
+spec:
+  hostnames:
+    - tokun.home.maximemoreillon.com
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: eg
+      namespace: envoy-gateway-system
+  rules:
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: tokun
+          port: 3000
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
