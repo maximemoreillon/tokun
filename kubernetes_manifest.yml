@@ -34,35 +34,6 @@ spec:
   ports:
     - port: 3000
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: tokun
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-
-    gettokun.dev/enabled: "true"
-    gettokun.dev/name: Tokun
-    gettokun.dev/icon: mdi-ideogram-cjk
-    gettokun.dev/group: 1P
-
-spec:
-  tls:
-    - hosts:
-        - tokun.home.maximemoreillon.com
-      secretName: tokun-tls
-  rules:
-    - host: tokun.home.maximemoreillon.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: tokun
-                port:
-                  number: 3000
----
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
