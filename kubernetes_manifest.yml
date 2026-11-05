@@ -81,6 +81,8 @@ spec:
       kind: Gateway
       name: eg
       namespace: envoy-gateway-system
+      # LAN, WireGuard and Tailscale only (allowlist on the private listener)
+      sectionName: private
   rules:
     - backendRefs:
         - group: ""
