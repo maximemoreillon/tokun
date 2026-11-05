@@ -76,6 +76,7 @@ metadata:
 spec:
   hostnames:
     - tokun.home.maximemoreillon.com
+    - tokun.private.maximemoreillon.com
   parentRefs:
     - group: gateway.networking.k8s.io
       kind: Gateway
