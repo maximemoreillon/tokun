@@ -69,10 +69,10 @@ kind: HTTPRoute
 metadata:
   name: tokun
   annotations:
-    gettokun.dev/enabled: "true"
-    gettokun.dev/name: Tokun
-    gettokun.dev/icon: mdi-ideogram-cjk
-    gettokun.dev/group: 1P
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: Tokun
+    gethomepage.dev/icon: mdi-ideogram-cjk
+    gethomepage.dev/group: 1P
 spec:
   hostnames:
     - tokun.home.maximemoreillon.com
